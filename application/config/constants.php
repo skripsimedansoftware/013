@@ -1,6 +1,47 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+if (isset($_SERVER['SERVER_PORT']))
+{
+	/*
+	|--------------------------------------------------------------------------
+	| Base URL
+	|--------------------------------------------------------------------------
+	*/
+	define('BASE_URL',
+		(!empty($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']==443?'https':'http':FALSE).
+		"://".(!empty($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:FALSE).str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
+
+	/*
+	|--------------------------------------------------------------------------
+	| Current URL
+	|--------------------------------------------------------------------------
+	*/
+	define('CURRENT_URL', (!empty($_SERVER['SERVER_PORT'])?$_SERVER['SERVER_PORT']==443?'https':'http':FALSE)."://".(!empty($_SERVER['SERVER_NAME'])?$_SERVER['SERVER_NAME']:FALSE).str_replace('//', '/', $_SERVER['REQUEST_URI']));
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Log Threshold
+|--------------------------------------------------------------------------
+*/
+defined('CI_LOG') or define('CI_LOG', isset($_SERVER['CI_LOG']) ? $_SERVER['CI_LOG'] : 1);
+
+/*
+|--------------------------------------------------------------------------
+| Encryption Key
+|--------------------------------------------------------------------------
+*/
+defined('ENCRYPTION_KEY') or define('ENCRYPTION_KEY', isset($_SERVER['ENCRYPTION_KEY']) ? $_SERVER['ENCRYPTION_KEY'] : 'skripsi');
+
+/*
+|--------------------------------------------------------------------------
+| Time Refrence
+|--------------------------------------------------------------------------
+*/
+defined('TIME_REFRENCE') or define('TIME_REFRENCE', isset($_SERVER['TIME_REFRENCE']) ? $_SERVER['TIME_REFRENCE'] : 'local');
+
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace
