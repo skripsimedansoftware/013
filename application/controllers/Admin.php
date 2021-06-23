@@ -14,6 +14,16 @@ class Admin extends CI_Controller {
 		$this->template->load('home');
 	}
 
+	public function login()
+	{
+		$this->load->view('admin/login');
+	}
+
+	public function register()
+	{
+		$this->load->view('admin/register');
+	}
+
 }
 
 /* End of file Admin.php */
