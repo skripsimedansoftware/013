@@ -44,6 +44,13 @@ defined('TIME_REFRENCE') or define('TIME_REFRENCE', isset($_SERVER['TIME_REFRENC
 
 /*
 |--------------------------------------------------------------------------
+| Active Database Group
+|--------------------------------------------------------------------------
+*/
+defined('ACTIVE_DATABASE_GROUP') or define('ACTIVE_DATABASE_GROUP', isset($_SERVER['ACTIVE_DATABASE_GROUP']) ? $_SERVER['ACTIVE_DATABASE_GROUP'] : 'default');
+
+/*
+|--------------------------------------------------------------------------
 | Display Debug backtrace
 |--------------------------------------------------------------------------
 |

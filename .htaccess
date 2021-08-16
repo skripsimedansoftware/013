@@ -18,5 +18,6 @@
 #==============================================================
 	<IfModule mod_env.c>
 		SetEnv CI_ENV development
+		SetEnv ACTIVE_DATABASE_GROUP default
 	</IfModule>
 #--------------------------------------------------------------#
