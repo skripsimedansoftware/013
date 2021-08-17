@@ -37,6 +37,31 @@ class Admin extends CI_Controller
 }
 ```
 
+### models/Admin.php
+
+```php
+<?php
+/**
+ * @package Codeigniter
+ * @subpackage Admin
+ * @category Model
+ * @author Agung Dirgantara <agungmasda29@gmail.com>
+ */
+
+namespace Angeli;
+
+class Admin extends MY_Model
+{
+	public function __construct()
+	{
+		parent::__construct();
+	}
+}
+
+/* End of file Admin.php */
+/* Location : ./application/models/Admin.php */
+```
+
 ### views/admin/base.php
 
 ```html
