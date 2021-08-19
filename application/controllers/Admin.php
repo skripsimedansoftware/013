@@ -52,10 +52,24 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function profile($id = NULL)
+	public function profile($id = NULL, $option = NULL)
 	{
-		$data['profile'] = $this->admin->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))));
-		$this->template->load('profile');
+		switch ($option)
+		{
+			case 'create':
+				$this->template->load('profile/create');
+			break;
+
+			case 'edit':
+				$data['profile'] = $this->admin->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))))->row();
+				$this->template->load('profile/edit', $data);
+			break;
+
+			default:
+				$data['profile'] = $this->admin->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))))->row();
+				$this->template->load('profile/view', $data);
+			break;
+		}
 	}
 
 	public function logout()
