@@ -7,6 +7,7 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('template', ['module' => 'admin']);
+		$this->load->model('admin');
 		if (empty($this->session->userdata('admin')))
 		{
 			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password']))
@@ -32,7 +33,8 @@ class Admin extends CI_Controller {
 				$admin = $this->admin->masuk($this->input->post('identity'), $this->input->post('password'));
 				if ($admin->num_rows() >= 1)
 				{
-					$this->session->set_userdata('admin', $admin->row()->id);
+					$this->session->set_userdata(strtolower($this->router->fetch_class()), $admin->row()->id);
+					redirect(base_url($this->router->fetch_class()), 'refresh');
 				}
 				else
 				{
@@ -48,6 +50,18 @@ class Admin extends CI_Controller {
 		{
 			$this->load->view('admin/login');
 		}
+	}
+
+	public function profile($id = NULL)
+	{
+		$data['profile'] = $this->admin->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))));
+		$this->load->view('admin/profile');
+	}
+
+	public function logout()
+	{
+		session_destroy();
+		redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
 	}
 
 	public function register()
