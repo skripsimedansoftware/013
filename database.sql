@@ -33,14 +33,14 @@ CREATE TABLE `admin` (
   `username` varchar(50) NOT NULL,
   `password` varchar(40) NOT NULL,
   `full_name` varchar(40) NOT NULL,
-  `foto` varchar(100) DEFAULT NULL
+  `photo` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `email`, `username`, `password`, `full_name`, `foto`) VALUES
+INSERT INTO `admin` (`id`, `email`, `username`, `password`, `full_name`, `photo`) VALUES
 (1, 'agungmasda29@gmail.com', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', NULL);
 
 -- --------------------------------------------------------
