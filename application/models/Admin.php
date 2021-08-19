@@ -16,7 +16,13 @@ class Admin extends MY_Model
 	}
 
 	public function masuk($identity, $password) {
-		$this->db->where('username', $identity)->where('password', sha1($password));
+		$this->db->group_start()
+			->where('username', $identity)
+			->or_group_start()
+				->where('email', $identity)
+			->group_end()
+		->group_end();
+		$this->db->where('password', sha1($password));
 		return $this->db->get('admin');
 	}
 
