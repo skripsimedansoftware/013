@@ -55,7 +55,7 @@ class Admin extends CI_Controller {
 	public function profile($id = NULL)
 	{
 		$data['profile'] = $this->admin->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))));
-		$this->load->view('admin/profile');
+		$this->template->load('profile');
 	}
 
 	public function logout()
