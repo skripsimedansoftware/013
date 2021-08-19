@@ -17,6 +17,7 @@
 #	CODEIGNITER ENVIRONMENT
 #==============================================================
 	<IfModule mod_env.c>
+		SetEnv TIME_REFRENCE Asia/Jakarta
 		SetEnv CI_ENV development
 		SetEnv ACTIVE_DATABASE_GROUP default
 	</IfModule>
