@@ -7,10 +7,10 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('template', ['module' => 'admin']);
-		$this->load->model('admin');
+		$this->load->model(['admin', 'email_confirm']);
 		if (empty($this->session->userdata('admin')))
 		{
-			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password']))
+			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'email_confirm']))
 			{
 				redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
 			}
@@ -73,7 +73,30 @@ class Admin extends CI_Controller {
 	{
 		if ($this->input->method() == 'post')
 		{
-
+			$find_account = $this->admin->where($this->input->post('identity'));
+			if ($find_account->num_rows() >= 1)
+			{
+				$confirm_code = random_string('numeric', 6);
+				$this->load->library('email');
+				$this->email->to($find_account->row()->email);
+				$this->email->from('no-reply@medansoftware.my.id', 'Medan Software');
+				$this->email->subject('Ganti Kata Sandi');
+				$data['code'] = $confirm_code;
+				$data['link'] = base_url($this->router->fetch_class().'/email_confirm/'.$confirm_code);
+				$data['full_name'] = $find_account->row()->full_name;
+				$this->email->message($this->load->view('email/reset_password', $data, TRUE));
+				if (!$this->email->send())
+				{
+					$this->session->set_flashdata('email_sent', FALSE);
+					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
+				}
+				else
+				{
+					$this->email_confirm->new('admin-'.$find_account->row()->id, $confirm_code);
+					$this->session->set_flashdata('email_sent', TRUE);
+					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
+				}
+			}
 		}
 		else
 		{
@@ -81,23 +104,9 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function reset_password($user_id = NULL)
+	public function email_confirm($code = NULL)
 	{
-		$this->email->to('agungmasda29@gmail.com');
-		$this->email->from('no-reply@medansoftware.my.id', 'Medan Software');
-		$this->email->subject('Ganti Kata Sandi');
-		$data['link'] = base_url();
-		$data['code'] = 1337;
-		$data['full_name'] = 'Agung Dirgantara';
-		$this->email->message($this->load->view('email/reset_password', $data, TRUE));
-		if (!$this->email->send())
-		{
-			redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
-		}
-		else
-		{
-			redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
-		}		
+		$this->load->view('admin/email_confirm');
 	}
 }
 
