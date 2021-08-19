@@ -1,4 +1,4 @@
-# Skripsi - Codeigniter Starter :coffee:
+# Medan Software - Codeigniter Starter :coffee:
 
 ## Template Loader
 
