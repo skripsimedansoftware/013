@@ -19,7 +19,8 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->template->load('home');
+		$data['session'] = $this->admin->detail(array('id' => $this->session->userdata(strtolower($this->router->fetch_class()))))->row();
+		$this->template->load('home', $data);
 	}
 
 	public function login()
@@ -57,15 +58,18 @@ class Admin extends CI_Controller {
 		switch ($option)
 		{
 			case 'create':
-				$this->template->load('profile/create');
+				$data['session'] = $this->admin->detail(array('id' => $this->session->userdata(strtolower($this->router->fetch_class()))))->row();
+				$this->template->load('profile/create', $data);
 			break;
 
 			case 'edit':
+				$data['session'] = $this->admin->detail(array('id' => $this->session->userdata(strtolower($this->router->fetch_class()))))->row();
 				$data['profile'] = $this->admin->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))))->row();
 				$this->template->load('profile/edit', $data);
 			break;
 
 			default:
+				$data['session'] = $this->admin->detail(array('id' => $this->session->userdata(strtolower($this->router->fetch_class()))))->row();
 				$data['profile'] = $this->admin->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))))->row();
 				$this->template->load('profile/view', $data);
 			break;
