@@ -38,6 +38,17 @@
 			<div class="alert alert-success"><?php echo $this->session->userdata('register'); ?></div>
 			<?php
 		}
+
+		if ($this->session->has_userdata('email_confirm'))
+		{
+			?>
+			<?php if ($this->session->userdata('email_confirm')) : ?>
+				<div class="alert alert-success">Email permintaan atur ulang kata sandi sudah dikirim, silahkan verifikasi <a href="<?php echo base_url($this->router->fetch_class().'/email_confirm') ?>">disini</a></div>
+			<?php else : ?>
+				<div class="alert alert-warning">Gagal mengirimkan email pengaturan ulang kata sandi</div>
+			<?php endif; ?>
+			<?php
+		}
 		?>
 		<form action="<?php echo base_url($this->router->fetch_class().'/forgot_password') ?>" method="post">
 			<div class="form-group has-feedback">

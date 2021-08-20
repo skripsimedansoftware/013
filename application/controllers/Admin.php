@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
 		$this->load->model(['admin', 'email_confirm']);
 		if (empty($this->session->userdata('admin')))
 		{
-			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'email_confirm']))
+			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'email_confirm', 'reset_password']))
 			{
 				redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
 			}
@@ -105,13 +105,13 @@ class Admin extends CI_Controller {
 				$this->email->message($this->load->view('email/reset_password', $data, TRUE));
 				if (!$this->email->send())
 				{
-					$this->session->set_flashdata('email_sent', FALSE);
+					$this->session->set_flashdata('email_confirm', FALSE);
 					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
 				}
 				else
 				{
 					$this->email_confirm->new('admin-'.$find_account->row()->id, $confirm_code);
-					$this->session->set_flashdata('email_sent', TRUE);
+					$this->session->set_flashdata('email_confirm', TRUE);
 					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
 				}
 			}
@@ -124,7 +124,52 @@ class Admin extends CI_Controller {
 
 	public function email_confirm($code = NULL)
 	{
-		$this->load->view('admin/email_confirm');
+		$data = array();
+
+		if ($this->input->method() == 'post')
+		{
+			$this->form_validation->set_rules('confirm_code', 'Kode Konfirmasi', 'trim|required|integer|max_length[6]');
+			if ($this->form_validation->run() == TRUE)
+			{
+				$data['email_confirm_detail'] = $this->email_confirm->detail(array('confirm_code' => $this->input->post('confirm_code')));
+			}
+		}
+		else
+		{
+			if (!empty($code))
+			{
+				$data['email_confirm_detail'] = (!empty($code))?$this->email_confirm->detail(array('confirm_code' => $code)):NULL;
+			}
+		}
+
+		$this->load->view('admin/email_confirm', $data);
+	}
+
+	public function reset_password()
+	{
+		$data = array();
+		if ($this->session->has_userdata('reset_password'))
+		{
+			$this->form_validation->set_rules('new_password', 'Kata Sandi Baru', 'trim|required');
+			$this->form_validation->set_rules('repeat_new_password', 'Ulangi Kata Sandi Baru', 'trim|required|matches[new_password]');
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				$model_data = explode('-', $this->session->userdata('reset_password')['user_id']);
+				$this->{$model_data[0]}->reset_password($model_data[1], $this->input->post('new_password'));
+				$this->email_confirm->confirm($this->session->userdata('reset_password')['confirm_code']);
+				session_destroy();
+				redirect($this->router->fetch_class().'/login', 'refresh');
+			}
+			else
+			{
+				$this->load->view('admin/email_confirm', $data);
+			}
+		}
+		else
+		{
+			show_error('Akses halaman dibatasi!!', 401, 'Tidak memiliki akses!!');
+		}
 	}
 }
 

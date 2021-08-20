@@ -39,6 +39,10 @@ class Admin extends MY_Model
 		->group_end();
 		return $this->db->get('admin');
 	}
+
+	public function reset_password($id, $new_password) {
+		return $this->db->update('admin', array('password' => sha1($new_password)), array('id' => $id));
+	}
 }
 
 /* End of file Admin.php */
