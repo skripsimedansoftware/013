@@ -1,4 +1,8 @@
-# Skripsi - Codeigniter Starter :coffee:
+# Medan Software - Codeigniter Starter :coffee:
+
+## Note!!
+
+- Change email config & reset password email from
 
 ## Template Loader
 

@@ -55,6 +55,11 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+	if (isset($_SERVER['TIME_REFRENCE']))
+	{
+		date_default_timezone_set($_SERVER['TIME_REFRENCE']);
+	}
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

@@ -8,8 +8,8 @@ application/logs/*
 
 !application/*/.htaccess
 
-application/uploads/*
-!application/uploads/index.html
+uploads/*
+!uploads/index.html
 
 composer.lock
 
