@@ -51,16 +51,17 @@
 				<?php echo form_error('password', '<span class="help-block error">', '</span>'); ?>
 			</div>
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-lg-6 col-xs-12">
 					<button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+				</div>
+				<div class="col-lg-6 col-xs-12" style="margin-top: 2%;">
+					<a href="<?php echo base_url('admin/register') ?>" class="btn btn-default btn-block btn-flat">Mendaftar</a>
 				</div>
 			</div>
 		</form>
-
-		<!-- <a href="#">I forgot my password</a><br> -->
 		<br>
-		<a href="<?php echo base_url('admin/register') ?>" class="text-center">Mendaftar</a>
-		<a href="<?php echo base_url('admin/forgot_password') ?>" class="text-center pull-right">Lupa Password</a>
+		<a href="<?php echo base_url() ?>" class="text-center">Beranda</a>
+		<a href="<?php echo base_url('admin/forgot_password') ?>" class="text-center pull-right">Lupa Kata Sandi</a>
 
 	</div>
 </div>
