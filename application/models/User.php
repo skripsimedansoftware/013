@@ -23,6 +23,10 @@ class User extends MY_Model
 	public function detail($where) {
 		return $this->db->get_where('user', $where);
 	}
+
+	public function update($where, $data) {
+		return $this->db->update('user', $data, $where);
+	}
 }
 
 /* End of file User.php */

@@ -18,6 +18,17 @@
 	<![endif]-->
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	<style type="text/css">
+	.help-block.error {
+		color: red;
+	}
+
+	.user-panel > .image > img {
+		width: 45px;
+		height: 45px;
+		/*height: auto;*/
+	}
+	</style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -39,7 +50,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue fixed">
 <div class="wrapper">
 
 	<!-- Main Header -->
@@ -78,7 +89,7 @@ desired effect
 										<a href="#">
 											<div class="pull-left">
 												<!-- User Image -->
-												<img src="<?php echo base_url('assets/adminlte/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+												<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 											</div>
 											<!-- Message title and timestamp -->
 											<h4>
@@ -163,17 +174,17 @@ desired effect
 						<!-- Menu Toggle Button -->
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<!-- The user image in the navbar-->
-							<img src="<?php echo base_url('assets/adminlte/') ?>dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+							<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="user-image" alt="User Image">
 							<!-- hidden-xs hides the username on small devices so only the image appears. -->
-							<span class="hidden-xs">Alexander Pierce</span>
+							<span class="hidden-xs"><?php echo $user->full_name ?></span>
 						</a>
 						<ul class="dropdown-menu">
 							<!-- The user image in the menu -->
 							<li class="user-header">
-								<img src="<?php echo base_url('assets/adminlte/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+								<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 
 								<p>
-									Alexander Pierce - Web Developer
+									<?php echo $user->full_name ?> - Web Developer
 									<small>Member since Nov. 2012</small>
 								</p>
 							</li>
@@ -195,10 +206,10 @@ desired effect
 							<!-- Menu Footer-->
 							<li class="user-footer">
 								<div class="pull-left">
-									<a href="#" class="btn btn-default btn-flat">Profile</a>
+									<a href="<?php echo base_url($this->router->fetch_class().'/profile') ?>" class="btn btn-default btn-flat">Profile</a>
 								</div>
 								<div class="pull-right">
-									<a href="#" class="btn btn-default btn-flat">Sign out</a>
+									<a href="<?php echo base_url($this->router->fetch_class().'/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
 								</div>
 							</li>
 						</ul>
@@ -220,12 +231,12 @@ desired effect
 			<!-- Sidebar user panel (optional) -->
 			<div class="user-panel">
 				<div class="pull-left image">
-					<img src="<?php echo base_url('assets/adminlte/') ?>dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+					<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image" style="max-height: 45px;">
 				</div>
 				<div class="pull-left info">
-					<p>Alexander Pierce</p>
+					<p><?php echo $user->full_name ?></p>
 					<!-- Status -->
-					<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+					<a href="#"><i class="fa fa-circle text-success"></i> online</a>
 				</div>
 			</div>
 
@@ -359,5 +370,16 @@ desired effect
 <script src="<?php echo base_url('assets/adminlte/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/adminlte/') ?>dist/js/adminlte.min.js"></script>
+<script type="text/javascript">
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			$('#profile-upload-preview').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+</script>
 </body>
 </html>
