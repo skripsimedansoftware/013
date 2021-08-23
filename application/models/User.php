@@ -1,29 +1,29 @@
 <?php
 /**
  * @package Codeigniter
- * @subpackage Admin
+ * @subpackage User
  * @category Model
  * @author Agung Dirgantara <agungmasda29@gmail.com>
  */
 
 namespace Angeli;
 
-class Admin extends MY_Model
+class User extends MY_Model
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function masuk($identity, $password) {
+	public function sign_in($identity, $password) {
 		$this->db->where('username', $identity)->where('password', sha1($password));
-		return $this->db->get('admin');
+		return $this->db->get('user');
 	}
 
 	public function detail($where) {
-		return $this->db->get_where('admin', $where);
+		return $this->db->get_where('user', $where);
 	}
 }
 
-/* End of file Admin.php */
-/* Location : ./application/models/Admin.php */
+/* End of file User.php */
+/* Location : ./application/models/User.php */
