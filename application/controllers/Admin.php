@@ -8,7 +8,7 @@ class Admin extends CI_Controller {
 		parent::__construct();
 		$this->load->library('template', ['module' => strtolower($this->router->fetch_class())]);
 		$this->load->model('user');
-		if (empty($this->session->userdata('user')) OR $this->session->userdata('user')['level'] !== strtolower($this->router->fetch_class()))
+		if (empty($this->session->userdata($this->router->fetch_class())))
 		{
 			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password']))
 			{
@@ -33,7 +33,7 @@ class Admin extends CI_Controller {
 				$user = $this->user->sign_in($this->input->post('identity'), $this->input->post('password'));
 				if ($user->num_rows() >= 1)
 				{
-					$this->session->set_userdata('user', array('id' => $user->row()->id, 'level' => strtolower($this->router->fetch_class())));
+					$this->session->set_userdata(strtolower($this->router->fetch_class()), $user->row()->id);
 					redirect(base_url($this->router->fetch_class()), 'refresh');
 				}
 				else
@@ -60,14 +60,14 @@ class Admin extends CI_Controller {
 			case 'edit':
 				if ($this->input->method() == 'post')
 				{
-					if ($id !== $this->session->userdata('user')['id'] OR $id > $this->session->userdata('user')['id'])
+					if ($id !== $this->session->userdata($this->router->fetch_class()) OR $id > $this->session->userdata($this->router->fetch_class()))
 					{
 						redirect(base_url($this->router->fetch_class().'/profile/'.$id) ,'refresh');
 					}
 
 					$this->form_validation->set_data($this->input->post());
-					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_is_owned_data[user.email.'.$this->session->userdata('user')['id'].']');
-					$this->form_validation->set_rules('username', 'Nama Pengguna', 'trim|required|callback_is_owned_data[user.username.'.$this->session->userdata('user')['id'].']');
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_is_owned_data[user.email.'.$this->session->userdata($this->router->fetch_class().']'));
+					$this->form_validation->set_rules('username', 'Nama Pengguna', 'trim|required|callback_is_owned_data[user.username.'.$this->session->userdata($this->router->fetch_class().']'));
 					$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'trim|required');
 
 					if ($this->form_validation->run() == TRUE)

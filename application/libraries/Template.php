@@ -18,7 +18,7 @@ class Template
 	public function load($page, $params = array())
 	{
 		$data['page'] = $this->ci->load->view($this->module.'/'.$page, $params, TRUE);
-		$data['user'] = $this->ci->user->detail(array('id' => $this->ci->session->userdata('user')['id']))->row();
+		$data['user'] = $this->ci->user->detail(array('id' => $this->ci->session->userdata($this->module)))->row();
 		$this->ci->load->view($this->module.'/base', array_merge($data, $params), FALSE);
 	}
 }

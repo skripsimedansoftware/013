@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `user`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE `user` (
   `id` int(2) NOT NULL,
   `email` varchar(40) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `admin` (`id`, `email`, `username`, `password`, `full_name`, `photo`) VALUES
+INSERT INTO `user` (`id`, `email`, `username`, `password`, `full_name`, `photo`) VALUES
 (1, 'agungmasda29@gmail.com', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', NULL);
 
 -- --------------------------------------------------------
@@ -63,9 +63,9 @@ CREATE TABLE `email_confirm` (
 --
 
 --
--- Indexes for table `admin`
+-- Indexes for table `user`
 --
-ALTER TABLE `admin`
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -79,9 +79,9 @@ ALTER TABLE `email_confirm`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `user`
 --
-ALTER TABLE `admin`
+ALTER TABLE `user`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
