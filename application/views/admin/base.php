@@ -92,10 +92,7 @@ desired effect
 												<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
 											</div>
 											<!-- Message title and timestamp -->
-											<h4>
-												Support Team
-												<small><i class="fa fa-clock-o"></i> 5 mins</small>
-											</h4>
+											<h4>Support Team<small><i class="fa fa-clock-o"></i> 5 mins</small></h4>
 											<!-- The message -->
 											<p>Why not buy a new awesome theme?</p>
 										</a>
@@ -122,9 +119,7 @@ desired effect
 								<!-- Inner Menu: contains the notifications -->
 								<ul class="menu">
 									<li><!-- start notification -->
-										<a href="#">
-											<i class="fa fa-users text-aqua"></i> 5 new members joined today
-										</a>
+										<a href="#"><i class="fa fa-users text-aqua"></i> 5 new members joined today</a>
 									</li>
 									<!-- end notification -->
 								</ul>
@@ -147,15 +142,11 @@ desired effect
 									<li><!-- Task item -->
 										<a href="#">
 											<!-- Task title and progress text -->
-											<h3>
-												Design some buttons
-												<small class="pull-right">20%</small>
-											</h3>
+											<h3>Design some buttons <small class="pull-right">20%</small></h3>
 											<!-- The progress bar -->
 											<div class="progress xs">
 												<!-- Change the css width attribute to simulate progress -->
-												<div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-														aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+												<div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
 													<span class="sr-only">20% Complete</span>
 												</div>
 											</div>
@@ -182,7 +173,6 @@ desired effect
 							<!-- The user image in the menu -->
 							<li class="user-header">
 								<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
-
 								<p>
 									<?php echo $user->full_name ?> - Web Developer
 									<small>Member since Nov. 2012</small>
@@ -215,9 +205,7 @@ desired effect
 						</ul>
 					</li>
 					<!-- Control Sidebar Toggle Button -->
-					<li>
-						<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-					</li>
+					<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -245,9 +233,8 @@ desired effect
 				<div class="input-group">
 					<input type="text" name="q" class="form-control" placeholder="Search...">
 					<span class="input-group-btn">
-							<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-							</button>
-						</span>
+						<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+					</span>
 				</div>
 			</form>
 			<!-- /.search form -->
@@ -260,9 +247,7 @@ desired effect
 				<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
 				<li class="treeview">
 					<a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-						<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
+						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu">
 						<li><a href="#">Link in level 2</a></li>
@@ -288,7 +273,7 @@ desired effect
 			Anything you want
 		</div>
 		<!-- Default to the left -->
-		<strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+		<strong>Copyright &copy; <?php echo date('Y') ?> <a href="#">Medan Software</a>.</strong> All rights reserved.
 	</footer>
 
 	<!-- Control Sidebar -->
