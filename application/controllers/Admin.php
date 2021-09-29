@@ -62,12 +62,13 @@ class Admin extends CI_Controller {
 				{
 					if ($id !== $this->session->userdata($this->router->fetch_class()) OR $id > $this->session->userdata($this->router->fetch_class()))
 					{
+						$this->session->set_flashdata('edit_profile', array('status' => 'failed', 'message' => 'Anda tidak memiliki akses untuk mengubah profil orang lain!'));
 						redirect(base_url($this->router->fetch_class().'/profile/'.$id) ,'refresh');
 					}
 
 					$this->form_validation->set_data($this->input->post());
-					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_is_owned_data[user.email.'.$this->session->userdata($this->router->fetch_class().']'));
-					$this->form_validation->set_rules('username', 'Nama Pengguna', 'trim|required|callback_is_owned_data[user.username.'.$this->session->userdata($this->router->fetch_class().']'));
+					$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_is_owned_data[user.email.'.strtolower($this->session->userdata($this->router->fetch_class()).']'));
+					$this->form_validation->set_rules('username', 'Nama Pengguna', 'trim|required|callback_is_owned_data[user.username.'.strtolower($this->session->userdata($this->router->fetch_class()).']'));
 					$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'trim|required');
 
 					if ($this->form_validation->run() == TRUE)
@@ -121,6 +122,7 @@ class Admin extends CI_Controller {
 						}
 
 						$this->user->update(array('id' => $id), $update_data);
+						$this->session->set_flashdata('edit_profile', array('status' => 'success', 'message' => 'Profil berhasil diperbaharui!'));
 						redirect(base_url($this->router->fetch_class().'/profile/'.$id) ,'refresh');
 					}
 					else
@@ -143,7 +145,7 @@ class Admin extends CI_Controller {
 	public function is_owned_data($val, $str)
 	{
 		$str = explode('.', $str);
-		$data = $this->db->get($str[0], array($str[1] => $val));
+		$data = $this->db->get('user', array($str[1] => $val));
 		if ($data->num_rows() >= 1)
 		{
 			if ($data->row()->id == $str[2])
