@@ -121,7 +121,7 @@ class Admin extends CI_Controller {
 							}
 						}
 
-						$this->user->update(array('id' => $id), $update_data);
+						$this->user->update($update_data, array('id' => $id));
 						$this->session->set_flashdata('edit_profile', array('status' => 'success', 'message' => 'Profil berhasil diperbaharui!'));
 						redirect(base_url($this->router->fetch_class().'/profile/'.$id) ,'refresh');
 					}
