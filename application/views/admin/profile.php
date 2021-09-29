@@ -5,6 +5,13 @@
 <section class="content container-fluid">
 	<div class="row">
 		<div class="col-lg-4 col-xs-12">
+			<?php if ($this->session->has_userdata('edit_profile')): ?>
+				<?php if ($this->session->userdata('edit_profile')['status'] == 'success') : ?>
+					<div class="alert alert-success"><?php echo $this->session->userdata('edit_profile')['message']; ?></div>
+				<?php else: ?>
+					<div class="alert alert-danger"><?php echo $this->session->userdata('edit_profile')['message']; ?></div>
+				<?php endif; ?>
+			<?php endif; ?>
 			<div class="box box-primary">
 				<div class="box-body box-profile">
 					<img class="profile-user-img img-responsive img-circle" src="<?php echo (!empty($profile->photo))?base_url('uploads/'.$profile->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" alt="User profile picture" style="height: 160px; width: 160px;">
