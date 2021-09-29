@@ -12,6 +12,8 @@ class MY_Model extends \CI_Model
 {
 	protected $db;
 
+	protected $table;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -78,6 +80,83 @@ class MY_Model extends \CI_Model
 		}
 
 		return FALSE;
+	}
+
+	/**
+	 * Set table name
+	 *
+	 * @param      string  $table  Table name
+	 */
+	public function set_table($table)
+	{
+		$this->table = $table;
+	}
+
+	/**
+	 * Create data
+	 *
+	 * @param      array   $data
+	 * @return     object
+	 */
+	public function create($data = array())
+	{
+		return $this->db->insert($this->table, $data);
+	}
+
+	/**
+	 * View data
+	 *
+	 * @param      array    $where   Where query
+	 * @param      int  	$limit   The limit
+	 * @param      int      $offset  The offset
+	 * @return     object
+	 */
+	public function view($where = array(), $limit = NULL, $offset = 0)
+	{
+		if (!empty($where))
+		{
+			$this->db->where($where);
+		}
+
+		if (!empty($limit))
+		{
+			$this->db->limit($limit, $offset);
+		}
+
+		return $this->db->get($this->table);
+	}
+
+	/**
+	 * Update data
+	 *
+	 * @param      array   $data   The data
+	 * @param      array   $where  The where
+	 * @return     object
+	 */
+	public function update(array $data, $where = array())
+	{
+		if (!empty($where))
+		{
+			$this->db->where($where);
+		}
+
+		return $this->db->update($this->table, $data);
+	}
+
+	/**
+	 * Delete data
+	 *
+	 * @param      array   $where  The where
+	 * @return     object
+	 */
+	public function delete($where = array())
+	{
+		if (!empty($where))
+		{
+			$this->db->where($where);
+		}
+
+		return $this->db->delete($this->table);
 	}
 }
 
