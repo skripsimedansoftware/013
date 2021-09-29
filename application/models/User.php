@@ -13,6 +13,7 @@ class User extends MY_Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->set_table('user');
 	}
 
 	public function sign_in($identity, $password) {
@@ -22,10 +23,6 @@ class User extends MY_Model
 
 	public function detail($where) {
 		return $this->db->get_where('user', $where);
-	}
-
-	public function update($where, $data) {
-		return $this->db->update('user', $data, $where);
 	}
 }
 
