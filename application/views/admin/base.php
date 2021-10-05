@@ -9,7 +9,8 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/Ionicons/css/ionicons.min.css">
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>dist/css/AdminLTE.min.css">
-	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>dist/css/skins/skin-blue.min.css">
+	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>dist/css/skins/_all-skins.min.css">
+	<link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2/dist/sweetalert2.min.css') ?>">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -28,6 +29,8 @@
 		height: 45px;
 		/*height: auto;*/
 	}
+
+	.swal2-popup { font-size: 1.6rem !important; }
 	</style>
 </head>
 <!--
@@ -351,10 +354,21 @@ desired effect
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url('assets/adminlte/') ?>bower_components/jquery/dist/jquery.min.js"></script>
+
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url('assets/adminlte/') ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- JQuery InputMask -->
+<script src="<?php echo base_url('assets/adminlte/') ?>plugins/input-mask/jquery.inputmask.js"></script>
+<script src="<?php echo base_url('assets/adminlte/') ?>plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="<?php echo base_url('assets/adminlte/') ?>plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="<?php echo base_url('assets/plugins/sweetalert2/dist/sweetalert2.all.min.js') ?>"></script>
+
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/adminlte/') ?>dist/js/adminlte.min.js"></script>
+
 <script type="text/javascript">
 function readURL(input) {
 	if (input.files && input.files[0]) {
