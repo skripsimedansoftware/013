@@ -25,20 +25,6 @@
 	<div class="login-box-body">
 		<p class="login-box-msg">Masukan email/username anda</p>
 		<?php 
-		if (!empty($this->session->userdata('login')))
-		{
-			?>
-			<div class="alert alert-danger"><?php echo $this->session->userdata('login'); ?></div>
-			<?php
-		}
-
-		if (!empty($this->session->userdata('register')))
-		{
-			?>
-			<div class="alert alert-success"><?php echo $this->session->userdata('register'); ?></div>
-			<?php
-		}
-
 		if ($this->session->has_userdata('forgot_password'))
 		{
 			?>
