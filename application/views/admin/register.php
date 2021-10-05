@@ -60,14 +60,14 @@
 			<div class="row">
 				<!-- /.col -->
 				<div class="col-xs-12">
-					<button type="submit" class="btn btn-primary btn-block btn-flat">Mendaftar</button>
+					<button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-users"></i> Mendaftar</button>
 				</div>
 				<!-- /.col -->
 			</div>
 		</form>
 
 		<br>
-		<a href="<?php echo base_url('admin/login') ?>" class="text-center">Saya sudah terdaftar</a>
+		<a href="<?php echo base_url('admin/login') ?>" class="text-center"><i class="fa fa-user-circle"></i> Saya sudah terdaftar</a>
 	</div>
 	<!-- /.form-box -->
 </div>

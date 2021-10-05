@@ -52,16 +52,16 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-xs-12">
-					<button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+					<button type="submit" class="btn btn-primary btn-block btn-flat">Masuk <i class="fa fa-sign-in"></i></button>
 				</div>
-				<div class="col-lg-6 col-xs-12" style="margin-top: 2%;">
-					<a href="<?php echo base_url('admin/register') ?>" class="btn btn-default btn-block btn-flat">Mendaftar</a>
+				<div class="col-lg-6 col-xs-12">
+					<a href="<?php echo base_url('admin/register') ?>" class="btn btn-default btn-block btn-flat"><i class="fa fa-users"></i> Mendaftar</a>
 				</div>
 			</div>
 		</form>
 		<br>
-		<a href="<?php echo base_url() ?>" class="text-center">Beranda</a>
-		<a href="<?php echo base_url('admin/forgot_password') ?>" class="text-center pull-right">Lupa Kata Sandi</a>
+		<a href="<?php echo base_url() ?>" class="text-center"><i class="fa fa-arrow-left"></i> Beranda</a>
+		<a href="<?php echo base_url('admin/forgot_password') ?>" class="text-center pull-right"><i class="fa fa-lock"></i> Lupa Kata Sandi?</a>
 
 	</div>
 </div>

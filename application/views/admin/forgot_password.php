@@ -59,15 +59,15 @@
 
 			<div class="row">
 				<div class="col-xs-12">
-					<button type="submit" class="btn btn-primary btn-block btn-flat">Atur Ulang Kata Sandi</button>
+					<button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-recycle"></i> Atur Ulang Kata Sandi</button>
 				</div>
 			</div>
 		</form>
 
 		<!-- <a href="#">I forgot my password</a><br> -->
 		<br>
-		<a href="<?php echo base_url('admin/register') ?>" class="text-center">Mendaftar</a>
-		<a href="<?php echo base_url('admin/login') ?>" class="text-center pull-right">Masuk</a>
+		<a href="<?php echo base_url('admin/register') ?>" class="text-center"><i class="fa fa-users"></i> Mendaftar</a>
+		<a href="<?php echo base_url('admin/login') ?>" class="text-center pull-right"><i class="fa fa-sign-in"></i> Masuk</a>
 
 	</div>
 </div>
