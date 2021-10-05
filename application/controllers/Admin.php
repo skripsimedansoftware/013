@@ -185,7 +185,7 @@ class Admin extends CI_Controller {
 	{
 		if ($this->input->method() == 'post')
 		{
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[40]');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[user.email]|max_length[40]', array('is_unique' => 'Email sudah terdaftar!'));
 			$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'trim|required|max_length[40]');
 			$this->form_validation->set_rules('password', 'Kata Sandi', 'trim|required');
 
