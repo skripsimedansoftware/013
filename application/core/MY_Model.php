@@ -111,7 +111,7 @@ class MY_Model extends \CI_Model
 	 * @param      int      $offset  The offset
 	 * @return     object
 	 */
-	public function view($where = array(), $limit = NULL, $offset = 0)
+	public function read($where = array(), $limit = NULL, $offset = 0)
 	{
 		if (!empty($where))
 		{
