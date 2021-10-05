@@ -18,7 +18,7 @@ $config['validate'] = FALSE;
 $config['priority'] = 3;
 $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
-$config['smtp_timeout'] = 60;
+$config['smtp_timeout'] = 10;
 $config['smtp_keepalive'] = FALSE;
 
 /* End of file email.php */

@@ -230,15 +230,18 @@ class Admin extends CI_Controller {
 				$this->email->message($this->load->view('email/reset_password', $data, TRUE));
 				if (!$this->email->send())
 				{
+					$this->session->set_flashdata('forgot_password', array('status' => 'failed', 'message' => 'Sistem tidak bisa mengirim email!'));
 					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
 				}
 				else
 				{
+					$this->session->set_flashdata('forgot_password', array('status' => 'success', 'message' => 'Email permintaan atur ulang kata sandi sudah dikirim, silahkan verifikasi <a href="'.base_url($this->router->fetch_class().'/email_confirm').'">disini</a>'));
 					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
 				}
 			}
 			else
 			{
+				$this->session->set_flashdata('forgot_password', array('status' => 'failed', 'message' => 'Sistem tidak menemukan akun!'));
 				redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
 			}
 		}
@@ -246,6 +249,11 @@ class Admin extends CI_Controller {
 		{
 			$this->load->view('admin/forgot_password');
 		}
+	}
+
+	public function email_confirm()
+	{
+
 	}
 
 	public function reset_password($user_id = NULL)

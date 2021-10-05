@@ -39,13 +39,13 @@
 			<?php
 		}
 
-		if ($this->session->has_userdata('email_confirm'))
+		if ($this->session->has_userdata('forgot_password'))
 		{
 			?>
-			<?php if ($this->session->userdata('email_confirm')) : ?>
-				<div class="alert alert-success">Email permintaan atur ulang kata sandi sudah dikirim, silahkan verifikasi <a href="<?php echo base_url($this->router->fetch_class().'/email_confirm') ?>">disini</a></div>
+			<?php if ($this->session->userdata('forgot_password')['status'] == 'success') : ?>
+				<div class="alert alert-success alert-dismissible" role="alert"><?php echo $this->session->userdata('forgot_password')['message']; ?><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
 			<?php else : ?>
-				<div class="alert alert-warning">Gagal mengirimkan email pengaturan ulang kata sandi</div>
+				<div class="alert alert-warning alert-dismissible" role="alert"><?php echo $this->session->userdata('forgot_password')['message']; ?><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
 			<?php endif; ?>
 			<?php
 		}

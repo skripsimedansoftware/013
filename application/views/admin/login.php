@@ -28,14 +28,14 @@
 		if ($this->session->has_userdata('login'))
 		{
 			?>
-			<div class="alert alert-danger"><?php echo $this->session->userdata('login')['message']; ?></div>
+			<div class="alert alert-danger alert-dismissible" role="alert"><?php echo $this->session->userdata('login')['message']; ?><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
 			<?php
 		}
 
 		if ($this->session->has_userdata('register'))
 		{
 			?>
-			<div class="alert alert-success"><?php echo $this->session->userdata('register')['message']; ?></div>
+			<div class="alert alert-success alert-dismissible" role="alert"><?php echo $this->session->userdata('register')['message']; ?><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
 			<?php
 		}
 		?>
