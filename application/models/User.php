@@ -17,12 +17,14 @@ class User extends MY_Model
 	}
 
 	public function sign_in($identity, $password) {
-		$this->db->where('username', $identity)->where('password', sha1($password));
-		return $this->db->get('user');
-	}
-
-	public function detail($where) {
-		return $this->db->get_where('user', $where);
+		$this->db->group_start()
+			->where('username', $identity)
+			->or_group_start()
+				->where('email', $identity)
+			->group_end()
+		->group_end();
+		$this->db->where('password', sha1($password));
+		return $this->db->get($this->table);
 	}
 }
 

@@ -13,6 +13,7 @@ class Email_confirm extends MY_Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->set_table('email_confirm');
 	}
 
 	public function new($user_uid = NULL, $confirm_code = '1337', $type = 'reset-password') {

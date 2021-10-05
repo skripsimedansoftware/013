@@ -54,7 +54,7 @@ class Admin extends CI_Controller {
 
 	public function profile($id = NULL, $option = NULL)
 	{
-		$data['profile'] = $this->user->detail(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))))->row();
+		$data['profile'] = $this->user->read(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))))->row();
 		switch ($option)
 		{
 			case 'edit':
