@@ -6,20 +6,20 @@
  * @author Agung Dirgantara <agungmasda29@gmail.com>
  */
 
-$config['useragent'] = 'MedanSoftware';
+$config['useragent'] = 'Medan Software';
 $config['protocol'] = 'smtp';
-$config['smtp_host'] = 'mail.medansoftware.my.id';
-$config['smtp_user'] = 'no-reply@medansoftware.my.id';
-$config['smtp_pass'] = ']!V~VU_Gkg4R';
-$config['smtp_port'] = 465;
-$config['smtp_timeout'] = 6;
-$config['smtp_keepalive'] = FALSE;
-$config['smtp_crypto'] = 'ssl';
+$config['smtp_host'] = '';
+$config['smtp_user'] = '';
+$config['smtp_pass'] = '';
+$config['smtp_port'] = '';
+$config['smtp_crypto'] = '';
 $config['wordwrap'] = TRUE;
+$config['validate'] = FALSE;
+$config['priority'] = 3;
 $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
-$config['validate'] = TRUE;
-$config['priority'] = 3;
+$config['smtp_timeout'] = 60;
+$config['smtp_keepalive'] = FALSE;
 
 /* End of file email.php */
 /* Location : ./application/config/email.php */

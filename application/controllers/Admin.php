@@ -38,7 +38,16 @@ class Admin extends CI_Controller {
 				}
 				else
 				{
-					redirect(base_url($this->router->fetch_class().'/'.$this->router->fetch_method()), 'refresh');
+					if ($this->user->search($this->input->post('identity'))->num_rows() >= 1)
+					{
+						$this->session->set_flashdata('login', array('status' => 'failed', 'message' => 'Kata sandi tidak sesuai'));
+						redirect(base_url($this->router->fetch_class().'/'.$this->router->fetch_method()), 'refresh');
+					}
+					else
+					{
+						$this->session->set_flashdata('login', array('status' => 'failed', 'message' => 'Akun tidak ditemukan'));
+						redirect(base_url($this->router->fetch_class().'/'.$this->router->fetch_method()), 'refresh');
+					}
 				}
 			}
 			else
@@ -174,14 +183,63 @@ class Admin extends CI_Controller {
 
 	public function register()
 	{
-		$this->load->view('admin/register');
+		if ($this->input->method() == 'post')
+		{
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[40]');
+			$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'trim|required|max_length[40]');
+
+			if ($this->form_validation->run() == TRUE)
+			{
+				$this->user->create(array(
+					'email' => $this->input->post('email'),
+					'password' => sha1($this->input->post('password')),
+					'full_name' => $this->input->post('full_name')
+				));
+
+				$this->session->set_flashdata('register', array('status' => 'success', 'message' => 'Pendaftaran berhasil!!'));
+				redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
+			}
+			else
+			{
+				$this->load->view('admin/register');
+			}
+		}
+		else
+		{
+			$this->load->view('admin/register');
+		}
 	}
 
 	public function forgot_password()
 	{
 		if ($this->input->method() == 'post')
 		{
+			$search = $this->user->search($this->input->post('identity'));
 
+			if ($search->num_rows() >= 1)
+			{
+				$this->load->library('email');
+				$this->email->set_alt_message('Reset password');
+				$this->email->to($search->row()->email);
+				$this->email->from('no-reply@medansoftware.my.id', 'Medan Software');
+				$this->email->subject('Ganti Kata Sandi');
+				$data['link'] = base_url($this->router->fetch_class().'/reset_password/');
+				$data['code'] = random_string('numeric', 6);
+				$data['full_name'] = $search->row()->full_name;
+				$this->email->message($this->load->view('email/reset_password', $data, TRUE));
+				if (!$this->email->send())
+				{
+					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
+				}
+				else
+				{
+					redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
+				}
+			}
+			else
+			{
+				redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
+			}
 		}
 		else
 		{
@@ -194,8 +252,8 @@ class Admin extends CI_Controller {
 		$this->email->to('agungmasda29@gmail.com');
 		$this->email->from('no-reply@medansoftware.my.id', 'Medan Software');
 		$this->email->subject('Ganti Kata Sandi');
-		$data['link'] = base_url();
-		$data['code'] = 1337;
+		$data['link'] = base_url($this->router->fetch_class().'/reset_password/');
+		$data['code'] = random_string('numeric', 6);
 		$data['full_name'] = 'Agung Dirgantara';
 		$this->email->message($this->load->view('email/reset_password', $data, TRUE));
 		if (!$this->email->send())
@@ -205,7 +263,7 @@ class Admin extends CI_Controller {
 		else
 		{
 			redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
-		}		
+		}
 	}
 }
 

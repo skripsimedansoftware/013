@@ -25,17 +25,17 @@
 	<div class="login-box-body">
 		<p class="login-box-msg">Masuk untuk memulai sesi anda</p>
 		<?php 
-		if (!empty($this->session->userdata('login')))
+		if ($this->session->has_userdata('login'))
 		{
 			?>
-			<div class="alert alert-danger"><?php echo $this->session->userdata('login'); ?></div>
+			<div class="alert alert-danger"><?php echo $this->session->userdata('login')['message']; ?></div>
 			<?php
 		}
 
-		if (!empty($this->session->userdata('register')))
+		if ($this->session->has_userdata('register'))
 		{
 			?>
-			<div class="alert alert-success"><?php echo $this->session->userdata('register'); ?></div>
+			<div class="alert alert-success"><?php echo $this->session->userdata('register')['message']; ?></div>
 			<?php
 		}
 		?>
