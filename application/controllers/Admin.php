@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
 		$this->load->model('user');
 		if (empty($this->session->userdata($this->router->fetch_class())))
 		{
-			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password']))
+			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'reset_password']))
 			{
 				redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
 			}
@@ -219,13 +219,14 @@ class Admin extends CI_Controller {
 
 			if ($search->num_rows() >= 1)
 			{
+				$code = random_string('numeric', 6);
 				$this->load->library('email');
 				$this->email->set_alt_message('Reset password');
 				$this->email->to($search->row()->email);
 				$this->email->from('no-reply@medansoftware.my.id', 'Medan Software');
 				$this->email->subject('Ganti Kata Sandi');
-				$data['link'] = base_url($this->router->fetch_class().'/reset_password/');
-				$data['code'] = random_string('numeric', 6);
+				$data['link'] = base_url($this->router->fetch_class().'/reset_password/'.$code);
+				$data['code'] = $code;
 				$data['full_name'] = $search->row()->full_name;
 				$this->email->message($this->load->view('email/reset_password', $data, TRUE));
 				if (!$this->email->send())
@@ -253,26 +254,12 @@ class Admin extends CI_Controller {
 
 	public function email_confirm()
 	{
-
+		echo 'Confirm Code';
 	}
 
-	public function reset_password($user_id = NULL)
+	public function reset_password($code = NULL)
 	{
-		$this->email->to('agungmasda29@gmail.com');
-		$this->email->from('no-reply@medansoftware.my.id', 'Medan Software');
-		$this->email->subject('Ganti Kata Sandi');
-		$data['link'] = base_url($this->router->fetch_class().'/reset_password/');
-		$data['code'] = random_string('numeric', 6);
-		$data['full_name'] = 'Agung Dirgantara';
-		$this->email->message($this->load->view('email/reset_password', $data, TRUE));
-		if (!$this->email->send())
-		{
-			redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
-		}
-		else
-		{
-			redirect(base_url($this->router->fetch_class().'/forgot_password'), 'refresh');
-		}
+		echo 'Reset Password';
 	}
 }
 
