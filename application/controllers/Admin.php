@@ -26,7 +26,7 @@ class Admin extends CI_Controller {
 	{
 		if ($this->input->method() == 'post')
 		{
-			$this->form_validation->set_rules('identity', 'Email/Username', 'trim|required');
+			$this->form_validation->set_rules('identity', 'Email / Nama Pengguna', 'trim|required');
 			$this->form_validation->set_rules('password', 'Kata Sandi', 'trim|required');
 			if ($this->form_validation->run() == TRUE)
 			{
@@ -187,6 +187,7 @@ class Admin extends CI_Controller {
 		{
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[40]');
 			$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'trim|required|max_length[40]');
+			$this->form_validation->set_rules('password', 'Kata Sandi', 'trim|required');
 
 			if ($this->form_validation->run() == TRUE)
 			{

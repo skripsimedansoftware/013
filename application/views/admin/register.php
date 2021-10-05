@@ -41,7 +41,7 @@
 	<div class="register-box-body">
 		<p class="login-box-msg">Pendaftaran</p>
 
-		<form action="<?php echo base_url('user/register') ?>" method="post">
+		<form action="<?php echo base_url($this->router->fetch_class().'/register') ?>" method="post">
 			<div class="form-group has-feedback">
 				<input type="text" class="form-control" placeholder="Nama Lengkap" name="full_name" value="<?php echo set_value('full_name') ?>">
 				<span class="glyphicon glyphicon-user form-control-feedback"></span>
