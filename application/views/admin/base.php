@@ -57,7 +57,7 @@ desired effect
 	<header class="main-header">
 
 		<!-- Logo -->
-		<a href="<?php echo base_url($this->router->fetch_class()) ?>" class="logo">
+		<a href="<?php echo base_url() ?>" target="_blank" class="logo">
 			<!-- mini logo for sidebar mini 50x50 pixels -->
 			<span class="logo-mini"><b>A</b>LT</span>
 			<!-- logo for regular state and mobile devices -->
@@ -243,7 +243,7 @@ desired effect
 			<ul class="sidebar-menu" data-widget="tree">
 				<li class="header">HEADER</li>
 				<!-- Optionally, you can add icons to the links -->
-				<li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+				<li class="<?php echo $this->router->fetch_method() == 'index'?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class()) ?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
 				<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
 				<li class="treeview">
 					<a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
