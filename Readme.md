@@ -1,88 +1,27 @@
-# Medan Software - Codeigniter Starter :coffee:
+# Sistem Pendukung Keputusan Dengan Menggunakan Metode SAW - Medan Software
 
-## Note!!
+> PERANCANGAN SISTEM PENDUKUNG KEPUTUSAN PEMBAGIAN PROJEK DENGAN MENGGUNAKAN METODE SIMPLE ADDITIVE WEIGHTING (SAW) BERBASIS WEBSITE PADA PERUSAHAAN KAMISPACE
 
-- Change email config & reset password email from
+**Kriteria :** 
 
-## Template Loader
+- Jumlah banyaknya proyek yg sedang di kerjakan (makin dikit makin besar kemungkinan dia dipilih)
+- Kesanggupan dalam menerima berapa byk projek
+- Nilai kepuasan dari pihak studio arsitek (makin bagus makin besar kemungkinan dia dipilih)
 
-```php
-$config = array(
-	'module' => 'admin'
-);
-$this->load->library('template', $config);
+## Roles
 
-```
+**ADMIN**
+- CRUD CRITERIA
+- VIEW PROJECT
 
-### controllers/Admin.php
 
-```php
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+**STUDIO**
+- CRUD PROJECT - {FINISH PROJECT, RATING PROJECT}
+- PREVIEW OWN PROJECT
 
-class Admin extends CI_Controller
-{
-	/**
-	 * constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-		$config = array(
-			'module' => 'admin'
-		);
-		$this->load->library('template', $config);
-	}
 
-	public function index()
-	{
-		$data['title'] = 'Page Title';
-		$this->template->load('home', $data);
-	}
-}
-```
+**FREELANCER**
+- RECEIVE PROJECT NOTIFICATION
+- PREVIEW OWN WORKING PROJECT
 
-### models/Admin.php
-
-```php
-<?php
-/**
- * @package Codeigniter
- * @subpackage Admin
- * @category Model
- * @author Agung Dirgantara <agungmasda29@gmail.com>
- */
-
-namespace Angeli;
-
-class Admin extends MY_Model
-{
-	public function __construct()
-	{
-		parent::__construct();
-	}
-}
-
-/* End of file Admin.php */
-/* Location : ./application/models/Admin.php */
-```
-
-### views/admin/base.php
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>Base</title>
-</head>
-<body>
-<?php echo $page; ?>
-</body>
-</html>
-```
-
-### views/admin/home.php
-
-```html
-<div class="row">Page Content Here</div>
-```
+![Flowchart](flowchart.jpeg)
