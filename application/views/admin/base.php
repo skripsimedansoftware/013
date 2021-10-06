@@ -10,7 +10,8 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/Ionicons/css/ionicons.min.css">
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>dist/css/AdminLTE.min.css">
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>dist/css/skins/_all-skins.min.css">
-	<link rel="stylesheet" href="<?php echo base_url('assets/plugins/sweetalert2/dist/sweetalert2.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/plugins/') ?>SweetAlert2/dist/sweetalert2.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/plugins/') ?>DataTables/datatables.min.css">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -368,7 +369,10 @@ desired effect
 <script src="<?php echo base_url('assets/adminlte/') ?>plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 <!-- SweetAlert2 -->
-<script src="<?php echo base_url('assets/plugins/sweetalert2/dist/sweetalert2.all.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/plugins/') ?>SweetAlert2/dist/sweetalert2.all.min.js') ?>"></script>
+
+<!-- DataTables -->
+<script src="<?php echo base_url('assets/plugins/') ?>DataTables/datatables.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/adminlte/') ?>dist/js/adminlte.min.js"></script>
