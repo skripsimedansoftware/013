@@ -389,7 +389,9 @@ function readURL(input) {
 }
 
 $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
-
+$('.datatable').DataTable({
+	responsive: true
+});
 
 /**
  * ----------------------------------------
