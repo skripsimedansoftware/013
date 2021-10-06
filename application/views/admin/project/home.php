@@ -24,7 +24,7 @@
 				<h3 class="box-title">List of Project</h3>
 			</div>
 			<div class="box-body">
-				<table class="table table-hover table-striped">
+				<table class="table table-hover table-striped datatable">
 					<thead>
 						<th>No</th>
 						<th>Name</th>
