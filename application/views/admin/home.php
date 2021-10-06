@@ -111,10 +111,10 @@
 						<?php foreach ($latest_freelancer as $key => $freelancer): ?>
 						<li class="item">
 							<div class="product-img">
-								<img src="<?php echo (!empty($freelancer['photo']))?base_url('uploads/'.$freelancer['photo']):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" alt="Product Image">
+								<img src="<?php echo (!empty($freelancer['photo']))?base_url('uploads/'.$freelancer['photo']):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" alt="User Image">
 							</div>
 							<div class="product-info">
-								<a href="javascript:void(0)" class="product-title"><?php echo $freelancer['full_name'] ?><span class="label label-warning pull-right">$1800</span></a>
+								<a href="javascript:void(0)" class="product-title"><?php echo $freelancer['full_name'] ?><span class="label label-warning pull-right"><?php echo $this->freelancer_project->freelance($freelancer['id'])->num_rows() ?> project</span></a>
 								<span class="product-description"><?php echo $freelancer['email'] ?></span>
 							</div>
 						</li>
