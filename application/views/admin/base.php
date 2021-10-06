@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Codeigniter | Starter</title>
+	<title>Sistem Pendukung Keputusan | SAW - Pembagian Project</title>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url('assets/adminlte/') ?>bower_components/font-awesome/css/font-awesome.min.css">
@@ -53,7 +53,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue fixed">
+<body class="hold-transition sidebar-mini skin-blue fixed">
 <div class="wrapper">
 
 	<!-- Main Header -->
@@ -62,9 +62,9 @@ desired effect
 		<!-- Logo -->
 		<a href="<?php echo base_url() ?>" target="_blank" class="logo">
 			<!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini"><b>A</b>LT</span>
+			<span class="logo-mini"><b>S</b>PK</span>
 			<!-- logo for regular state and mobile devices -->
-			<span class="logo-lg"><b>Admin</b>LTE</span>
+			<span class="logo-lg"><b>SPK</b> - SAW</span>
 		</a>
 
 		<!-- Header Navbar -->
@@ -176,25 +176,7 @@ desired effect
 							<!-- The user image in the menu -->
 							<li class="user-header">
 								<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
-								<p>
-									<?php echo $user->full_name ?> - Web Developer
-									<small>Member since Nov. 2012</small>
-								</p>
-							</li>
-							<!-- Menu Body -->
-							<li class="user-body">
-								<div class="row">
-									<div class="col-xs-4 text-center">
-										<a href="#">Followers</a>
-									</div>
-									<div class="col-xs-4 text-center">
-										<a href="#">Sales</a>
-									</div>
-									<div class="col-xs-4 text-center">
-										<a href="#">Friends</a>
-									</div>
-								</div>
-								<!-- /.row -->
+								<p><?php echo $user->full_name ?> - ADMIN</p>
 							</li>
 							<!-- Menu Footer-->
 							<li class="user-footer">
@@ -244,19 +226,11 @@ desired effect
 
 			<!-- Sidebar Menu -->
 			<ul class="sidebar-menu" data-widget="tree">
-				<li class="header">HEADER</li>
+				<li class="header">KAMI SPACE</li>
 				<!-- Optionally, you can add icons to the links -->
 				<li class="<?php echo $this->router->fetch_method() == 'index'?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class()) ?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
-				<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-				<li class="treeview">
-					<a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-						<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="#">Link in level 2</a></li>
-						<li><a href="#">Link in level 2</a></li>
-					</ul>
-				</li>
+				<li class="<?php echo (in_array($this->router->fetch_method(), ['project', 'saw_freelance']))?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class().'/project') ?>"><i class="fa fa-map"></i> <span>Project</span></a></li>
+				<li class="<?php echo $this->router->fetch_method() == 'criteria'?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class().'/criteria') ?>"><i class="fa fa-puzzle-piece"></i> <span>Criteria</span></a></li>
 			</ul>
 			<!-- /.sidebar-menu -->
 		</section>
@@ -273,10 +247,10 @@ desired effect
 	<footer class="main-footer">
 		<!-- To the right -->
 		<div class="pull-right hidden-xs">
-			Anything you want
+			Skripsi
 		</div>
 		<!-- Default to the left -->
-		<strong>Copyright &copy; <?php echo date('Y') ?> <a href="#">Medan Software</a>.</strong> All rights reserved.
+		<strong>Copyright &copy; <?php echo date('Y') ?> <a href="#">Kamispace</a>.</strong> All rights reserved.
 	</footer>
 
 	<!-- Control Sidebar -->
@@ -347,6 +321,36 @@ desired effect
 	<!-- Add the sidebar's background. This div must be placed
 	immediately after the control sidebar -->
 	<div class="control-sidebar-bg"></div>
+
+	<!-- modal add project category -->
+	<div class="modal fade" id="modal-category">
+		<div class="modal-dialog">
+			<form id="form-category">
+				<input type="hidden" id="category-method">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="modal-title-category">Add Category</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label>Name</label>
+									<input type="text" class="form-control" name="name" placeholder="Category Name" id="category-name">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!-- /modal -->
 </div>
 <!-- ./wrapper -->
 
@@ -379,6 +383,123 @@ function readURL(input) {
 		reader.readAsDataURL(input.files[0]);
 	}
 }
+
+$('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+
+
+/**
+ * ----------------------------------------
+ * Project Category
+ * ----------------------------------------
+ */
+function load_project_category() {
+	$.ajax({
+		url: '<?php echo base_url($this->router->fetch_class().'/project_category') ?>',
+		type: 'get',
+		success: function (data) {
+			$('#project-category-list').empty();
+			data.data.forEach((el, index) => {
+				$('#project-category-list').append(
+				'<tr>'+
+					'<td>'+el.name+'</td>'+
+					'<td>'+
+						'<button class="btn btn-xs btn-default modal-category-edit" onclick="category_edit('+el.id+')"  data-id="'+el.id+'" data-toggle="modal" data-target="#modal-category" ><i class="fa fa-edit"></i></button>'+
+						"&nbsp;&nbsp;&nbsp;&nbsp;"+
+						'<button class="btn btn-xs btn-danger modal-category-delete" onclick="category_delete('+el.id+')"  data-id="'+el.id+'"><i class="fa fa-trash-o"></i></button>'+
+					'</td>'+
+				'</tr>'
+				);
+			});
+		}
+	});
+}
+
+function category_edit(id) {
+	$('#modal-title-category').text('Edit Category');
+	$('#category-method').val('edit').attr('data-id', id);
+	$.ajax({
+		url: '<?php echo base_url($this->router->fetch_class().'/project_category/view/') ?>'+id,
+		type: 'get',
+		success: function (data) {
+			$('#category-name').val(data.data.name);
+		},
+		error: function(error) {
+			console.log(error)
+		}
+	});
+}
+
+function category_delete(id) {
+	Swal.fire({
+		title: 'Do you want to delete?',
+		showDenyButton: false,
+		showCancelButton: true,
+		confirmButtonText: 'Yes, delete it!',
+		denyButtonText: `Don't save`,
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				url: '<?php echo base_url($this->router->fetch_class().'/project_category/delete/') ?>'+id,
+				type: 'get',
+				success: function (data) {
+					Swal.fire('Project category deleted!', '', 'success');
+					load_project_category();
+				},
+				error: function(error) {
+					console.log(error)
+				}
+			});
+		} else if (result.isDenied) {
+			Swal.fire('Changes are not saved', '', 'info')
+		}
+	});
+}
+
+$('#modal-category-add').on('click', function () {
+	$('#modal-title-category').text('Add Category');
+	$('#category-method').val('add').attr('data-id', null);
+	$('#category-name').val('');
+});
+
+
+$('#form-category').on('submit', (function(e) {
+	e.preventDefault();
+	var id = $('#category-method').attr('data-id');
+	if ($('#category-method').val() == 'add')
+	{
+		$.ajax({
+			url: '<?php echo base_url($this->router->fetch_class().'/project_category') ?>',
+			type: 'post',
+			data: {
+				name: $('#category-name').val()
+			},
+			success: function (data) {
+				load_project_category();
+			},
+			error: function(error) {
+				console.log(error)
+			}
+		});
+	}
+	else
+	{
+		$.ajax({
+			url: '<?php echo base_url($this->router->fetch_class().'/project_category/edit/') ?>'+id,
+			type: 'post',
+			data: {
+				name: $('#category-name').val()
+			},
+			success: function (data) {
+				load_project_category();
+			},
+			error: function(error) {
+				console.log(error)
+			}
+		});
+	}
+
+	$('#modal-category').modal('hide');
+}));
 </script>
 </body>
 </html>
