@@ -15,6 +15,14 @@ class Freelancer_project extends MY_Model
 		parent::__construct();
 		$this->set_table('freelancer_project');
 	}
+
+	public function freelance($user_id) {
+		return $this->db->get_where($this->table, array('user_id' => $user_id));
+	}
+
+	public function project($project_id) {
+		return $this->db->get_where($this->table, array('project_id' => $project_id));
+	}
 }
 
 /* End of file Freelancer_project.php */
