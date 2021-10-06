@@ -7,7 +7,7 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('template', ['module' => strtolower($this->router->fetch_class())]);
-		$this->load->model(['user', 'project', 'project_category', 'criteria']);
+		$this->load->model(['user', 'project', 'project_category', 'criteria', 'freelancer_project', 'alternative_data']);
 		if (empty($this->session->userdata($this->router->fetch_class())))
 		{
 			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'reset_password']))
@@ -19,7 +19,9 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->template->load('home');
+		$data['latest_project'] = array_slice(array_reverse($this->project->read()->result_array()), 0, 4); // limit as 4 project from last
+		$data['latest_freelancer'] = array_slice(array_reverse($this->user->read(array('role' => 'freelancer'))->result_array()), 0, 4); // limit as 4 freelance from last
+		$this->template->load('home', $data);
 	}
 
 	public function login()
@@ -284,6 +286,35 @@ class Admin extends CI_Controller {
 					$this->template->load('project/home', $data);
 				}
 			}
+		}
+	}
+
+	public function set_project_status($id = NULL, $status = 'in-progress')
+	{
+		if (!empty($id))
+		{
+			$this->project->update(array(
+				'status' => $status
+			), array('id' => $id));
+
+			if ($status == 'canceled') 
+			{
+				$this->session->set_flashdata('project', array('status' => 'failed', 'message' => 'Project not canceled'));
+			}
+			elseif ($status == 'in-progress')
+			{
+				$this->session->set_flashdata('project', array('status' => 'success', 'message' => 'Project status now in progress'));
+			}
+			elseif ($status == 'not-completed')
+			{
+				$this->session->set_flashdata('project', array('status' => 'failed', 'message' => 'Project not completed'));
+			}
+			else
+			{
+				$this->session->set_flashdata('project', array('status' => 'success', 'message' => 'Project finished'));
+			}
+
+			redirect(base_url($this->router->fetch_class().'/project'), 'refresh');
 		}
 	}
 
