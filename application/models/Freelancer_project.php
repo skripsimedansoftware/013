@@ -23,6 +23,11 @@ class Freelancer_project extends MY_Model
 	public function project($project_id) {
 		return $this->db->get_where($this->table, array('project_id' => $project_id));
 	}
+
+	public function has_rating() {
+		$this->db->where('rating !=', NULL);
+		return $this->db->geT($this->table);
+	}
 }
 
 /* End of file Freelancer_project.php */
