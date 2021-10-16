@@ -88,7 +88,7 @@
 										?>
 									</td>
 									<td><?php echo $project['area'] ?></td>
-									<td><?php echo $project['budget'] ?></td>
+									<td>Rp.<?php echo number_format($project['budget'], 2) ?></td>
 								</tr>
 								<?php endforeach; ?>
 							</tbody>
