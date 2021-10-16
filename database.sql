@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 04, 2021 at 11:27 AM
--- Server version: 5.7.33
--- PHP Version: 7.4.19
+-- Host: 127.0.0.1
+-- Generation Time: Oct 16, 2021 at 10:21 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 7.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -71,7 +71,8 @@ CREATE TABLE `email_confirm` (
 CREATE TABLE `freelancer_project` (
   `id` int(4) NOT NULL,
   `user_id` int(2) NOT NULL,
-  `project_id` int(4) NOT NULL
+  `project_id` int(4) NOT NULL,
+  `rating` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
