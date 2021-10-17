@@ -3,6 +3,12 @@
 	<h1>Administrator<small>Project</small></h1>
 </section>
 
+<style type="text/css">
+label.freelacer-info {
+	width: 20%;
+}
+</style>
+
 <!-- Main content -->
 <section class="content container-fluid">
 	<div class="box">
@@ -184,6 +190,9 @@
 				$rank = 1;
 				foreach ($sum_prefrence as $key => $value) :
 					$last_data = array_merge($saw->getAlternative()->get($key), array('value' => $value));
+					echo "<pre>";
+					print_r ($last_data);
+					echo "</pre>";
 					?>
 					<tr>
 						<td><?php echo $rank ?></td>
@@ -197,8 +206,33 @@
 						<td><?php echo $freelancer_criteria; ?></td>
 						<?php endforeach; ?>
 						<td><?php echo $value; ?></td>
-						<td><button class="btn btn-xs btn-primary">Beri Project</button></td>
+						<td>
+							<button class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-profile-freelancer-<?php echo $last_data['data']['id'] ?>">Profil Pekerja</button>
+							<button class="btn btn-xs btn-primary">Beri Project</button>
+						</td>
 					</tr>
+					<!-- modal add project category -->
+					<div class="modal fade" id="modal-profile-freelancer-<?php echo $last_data['data']['id'] ?>">
+						<div class="modal-dialog">
+							<form id="form-category">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h4 class="modal-title" id="modal-title-category">Profil Freelancer</h4>
+									</div>
+									<div class="modal-body">
+										<label class="freelacer-info">Nama Lengkap</label><?php echo $last_data['data']['full_name'] ?><br>
+										<label class="freelacer-info">Nama Lengkap</label><?php echo $last_data['data']['full_name'] ?><br>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Save</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- /modal -->
 					<?php
 					$rank++;
 				endforeach;
