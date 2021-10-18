@@ -24,9 +24,16 @@ class Freelancer_project extends MY_Model
 		return $this->db->get_where($this->table, array('project_id' => $project_id));
 	}
 
-	public function has_rating() {
+	public function on_going($user_id) {
+		$this->db->where('user_id', $user_id);
+		$this->db->where('rating', NULL);
+		return $this->db->get($this->table);
+	}
+
+	public function has_rating($user_id) {
+		$this->db->where('user_id', $user_id);
 		$this->db->where('rating !=', NULL);
-		return $this->db->geT($this->table);
+		return $this->db->get($this->table);
 	}
 }
 

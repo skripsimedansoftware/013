@@ -72,43 +72,52 @@
 
 									case 'in-progress':
 										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-block btn-flat btn-xs btn-warning">Dalam Proses</a>
+										<a href="#" class="btn btn-block btn-flat btn-xs bg-navy">Dalam Proses</a>
 										<?php
 									break;
 
 									case 'not-completed':
 										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-block btn-flat btn-xs btn-primary">Tidak Selesai</a>
+										<a href="#" class="btn btn-block btn-flat btn-xs btn-warning">Tidak Selesai</a>
+										<?php
+									break;
+
+									case 'canceled':
+										?>
+										<a href="#" class="btn btn-block btn-flat btn-xs btn-danger">Dibatalkan</a>
 										<?php
 									break;
 									
 									// finished
 									default:
 										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-block btn-flat btn-xs btn-success">Selesai</a>
+										<a href="#" class="btn btn-block btn-flat btn-xs btn-success">Selesai</a>
 										<?php
 									break;
 								} ?>
 							</td>
 							<td>
-								<a href="<?php echo base_url($this->router->fetch_class().'/project/edit/'.$project->id) ?>" class="btn btn-flat btn-xs btn-default">Sunting</a>
+								<?php if (in_array($project->status, ['search-freelance'])) : ?>
+									<a href="<?php echo base_url($this->router->fetch_class().'/project/edit/'.$project->id) ?>" class="btn btn-flat btn-xs btn-default">Sunting</a>
+									<a href="<?php echo base_url($this->router->fetch_class().'/set_project_status/'.$project->id.'/canceled') ?>" class="btn btn-flat btn-xs btn-warning">Batalkan</a>
+								<?php endif; ?>
 								<?php switch ($project->status) {
 									case 'search-freelance':
 										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/cancel/'.$project->id) ?>" class="btn btn-flat btn-xs btn-danger">Hapus</a>
+										<a href="<?php echo base_url($this->router->fetch_class().'/project/delete/'.$project->id) ?>" class="btn btn-flat btn-xs btn-danger">Hapus</a>
 										<?php
 									break;
 
 									case 'in-progress':
 										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/change_status/'.$project->id) ?>" class="btn btn-flat btn-xs btn-danger">Ubah Status</a>
+										<a href="<?php echo base_url($this->router->fetch_class().'/project/change_status/'.$project->id) ?>" class="btn btn-flat btn-xs bg-maroon">Ubah Status</a>
 										<?php
 									break;
 									
 									// finished
 									default:
 										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-block btn-flat btn-xs btn-info">Detail</a>
+										<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-flat btn-xs btn-info">Detail</a>
 										<?php
 									break;
 								} ?>

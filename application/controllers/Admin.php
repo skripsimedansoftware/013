@@ -7,7 +7,7 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->library('template', ['module' => strtolower($this->router->fetch_class())]);
-		$this->load->model(['user', 'project', 'project_category', 'criteria', 'freelancer_project', 'alternative_data']);
+		$this->load->model(['user', 'project', 'project_category', 'criteria', 'freelancer_project', 'alternative_data', 'notification']);
 		if (empty($this->session->userdata($this->router->fetch_class())))
 		{
 			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'reset_password']))
@@ -218,12 +218,25 @@ class Admin extends CI_Controller {
 			}
 			else
 			{
+				// view
+				if ($option == 'detail')
+				{
+					$data['project'] = $this->project->read(array('id' => $id))->row();
+					$this->template->load('project/view', $data);
+				}
 				// edit
-				if ($option == 'edit')
+				elseif ($option == 'edit')
 				{
 					$data['project'] = $this->project->read(array('id' => $id))->row();
 					$data['projects_category'] = $this->project_category->read()->result();
 					$this->template->load('project/edit', $data);
+				}
+				// change status
+				elseif ($option == 'change_status')
+				{
+					$data['project'] = $this->project->read(array('id' => $id))->row();
+					$data['projects_category'] = $this->project_category->read()->result();
+					$this->template->load('project/change_status', $data);
 				}
 				// delete
 				else
@@ -299,7 +312,7 @@ class Admin extends CI_Controller {
 
 			if ($status == 'canceled') 
 			{
-				$this->session->set_flashdata('project', array('status' => 'failed', 'message' => 'Project not canceled'));
+				$this->session->set_flashdata('project', array('status' => 'failed', 'message' => 'Project canceled'));
 			}
 			elseif ($status == 'in-progress')
 			{
@@ -316,6 +329,35 @@ class Admin extends CI_Controller {
 
 			redirect(base_url($this->router->fetch_class().'/project'), 'refresh');
 		}
+	}
+
+	public function end_project($id = NULL)
+	{
+		if (!empty($id))
+		{
+			$status = $this->input->post('status');
+			$percent = str_replace('%', '', $this->input->post('percent_progress'));
+
+
+			if ($status == 'finished')
+			{
+				$percent = 100;
+			}
+			else
+			{
+				if ($percent >= 100)
+				{
+					$status = 'finished';
+				}
+			}
+
+			$this->project->update(array(
+				'status' => $status,
+				'percent' => $percent
+			), array('id' => $id));
+		}
+
+		redirect(base_url($this->router->fetch_class().'/project'), 'refresh');
 	}
 
 	public function project_category($option = 'view', $id = NULL)
@@ -458,12 +500,27 @@ class Admin extends CI_Controller {
 	{
 		if (!empty($project_id))
 		{
-			$this->template->load('saw_freelance/home');
+			$data['project_id'] = $project_id;
+			$this->template->load('saw_freelance/home', $data);
 		}
 		else
 		{
 			show_404();
 		}
+	}
+
+	public function give_project($user_id, $project_id)
+	{
+		$this->project->update(array('status' => 'in-progress'), array('id' => $project_id));
+		$this->notification->create(array('role' => 'freelancer', 'user_id' => $user_id, 'uri' => '/project?id='.$project_id.'&new=true'));
+		$this->freelancer_project->create(array(
+			'user_id' => $user_id,
+			'project_id' => $project_id,
+			'rating' => NULL
+		));
+
+		$this->session->set_flashdata('project', array('status' => 'success', 'message' => 'Project akan segera dikerjakan oleh freelancer'));
+		redirect(base_url($this->router->fetch_class().'/project'), 'refresh');
 	}
 
 	public function is_owned_data($val, $str)

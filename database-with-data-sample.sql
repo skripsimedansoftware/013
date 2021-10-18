@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2021 at 10:22 PM
+-- Generation Time: Oct 19, 2021 at 01:49 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -135,16 +135,33 @@ CREATE TABLE `freelancer_project` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(4) NOT NULL,
+  `role` enum('admin','studio','freelancer') DEFAULT NULL,
+  `user_id` int(2) DEFAULT NULL,
+  `uri` varchar(100) NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `project`
 --
 
 CREATE TABLE `project` (
   `id` int(4) NOT NULL,
+  `owner` int(2) NOT NULL,
   `name` varchar(40) NOT NULL,
   `category` int(4) NOT NULL,
   `area` varchar(20) DEFAULT NULL,
   `budget` double NOT NULL,
   `deadline` date DEFAULT NULL,
+  `percent` int(3) DEFAULT NULL,
+  `temp-change` longtext DEFAULT NULL,
   `status` enum('search-freelance','canceled','in-progress','not-completed','finished') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -152,8 +169,8 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`id`, `name`, `category`, `area`, `budget`, `deadline`, `status`) VALUES
-(1, 'Cari Freelancer', 1, 'Area apa gitulah', 200000, '2022-02-22', 'search-freelance');
+INSERT INTO `project` (`id`, `owner`, `name`, `category`, `area`, `budget`, `deadline`, `percent`, `temp-change`, `status`) VALUES
+(1, 1, 'Cari Freelancer', 1, 'Area apa gitulah', 200000, '2022-02-22', NULL, NULL, 'search-freelance');
 
 -- --------------------------------------------------------
 
@@ -228,6 +245,18 @@ ALTER TABLE `email_confirm`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `freelancer_project`
+--
+ALTER TABLE `freelancer_project`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `project`
 --
 ALTER TABLE `project`
@@ -266,6 +295,18 @@ ALTER TABLE `criteria`
 --
 ALTER TABLE `email_confirm`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `freelancer_project`
+--
+ALTER TABLE `freelancer_project`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `project`

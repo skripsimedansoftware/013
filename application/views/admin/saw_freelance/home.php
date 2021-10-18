@@ -4,7 +4,7 @@
 </section>
 
 <style type="text/css">
-label.freelacer-info {
+label.freelancer-info {
 	width: 20%;
 }
 </style>
@@ -189,47 +189,88 @@ label.freelacer-info {
 				$sort_from_big = arsort($sum_prefrence);
 				$rank = 1;
 				foreach ($sum_prefrence as $key => $value) :
-					$last_data = array_merge($saw->getAlternative()->get($key), array('value' => $value));
-					echo "<pre>";
-					print_r ($last_data);
-					echo "</pre>";
+					$freelancer = array_merge($saw->getAlternative()->get($key), array('value' => $value));
+					$project_has_rating = $this->freelancer_project->has_rating($freelancer['data']['id']);
+					$project_on_going = $this->freelancer_project->on_going($freelancer['data']['id']);
 					?>
 					<tr>
 						<td><?php echo $rank ?></td>
 						<td>
 							<?php
-							// echo json_encode($last_data['data']);
-							echo $last_data['data']['full_name'];
+							echo $freelancer['data']['full_name'];
 							?>
 						</td>
-						<?php foreach ($last_data['criteria'] as $freelancer_criteria) : ?>
+						<?php foreach ($freelancer['criteria'] as $freelancer_criteria) : ?>
 						<td><?php echo $freelancer_criteria; ?></td>
 						<?php endforeach; ?>
 						<td><?php echo $value; ?></td>
 						<td>
-							<button class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-profile-freelancer-<?php echo $last_data['data']['id'] ?>">Profil Pekerja</button>
-							<button class="btn btn-xs btn-primary">Beri Project</button>
+							<button class="btn btn-xs btn-info" data-toggle="modal" data-target="#modal-profile-freelancer-<?php echo $freelancer['data']['id'] ?>">Profil Pekerja</button>
+							<a href="<?php echo base_url($this->router->fetch_class().'/give_project/'.$freelancer['data']['id'].'/'.$project_id) ?>" class="btn btn-xs btn-primary">Beri Project</a>
 						</td>
 					</tr>
 					<!-- modal add project category -->
-					<div class="modal fade" id="modal-profile-freelancer-<?php echo $last_data['data']['id'] ?>">
+					<div class="modal fade" id="modal-profile-freelancer-<?php echo $freelancer['data']['id'] ?>">
 						<div class="modal-dialog">
-							<form id="form-category">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-										<h4 class="modal-title" id="modal-title-category">Profil Freelancer</h4>
-									</div>
-									<div class="modal-body">
-										<label class="freelacer-info">Nama Lengkap</label><?php echo $last_data['data']['full_name'] ?><br>
-										<label class="freelacer-info">Nama Lengkap</label><?php echo $last_data['data']['full_name'] ?><br>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn btn-primary">Save</button>
-									</div>
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="modal-title-category">Profil Freelancer</h4>
 								</div>
-							</form>
+								<div class="modal-body">
+									<label class="freelancer-info">Email</label> : <?php echo $freelancer['data']['email'] ?><br>
+									<label class="freelancer-info">Nama Lengkap</label> : <?php echo $freelancer['data']['full_name'] ?><br>
+									<label class="freelancer-info">Project Berjalan</label>
+									<?php if ($project_on_going->num_rows() > 0): ?>
+									: 
+									<ol>
+									<?php foreach ($project_on_going->result() as $project) : ?>
+										<?php $project_detail = $this->project->read(array('id' => $project->project_id)); ?>
+										<?php if ($project_detail->num_rows() > 0) : ?>
+											<?php $project_detail = $project_detail->row() ?>
+										<li>
+											<ul>
+												<li><label class="freelancer-info">Nama Project</label> : <?php echo $project_detail->name ?></li>
+												<li><label class="freelancer-info">Deadline</label> : <?php echo nice_date($project_detail->deadline, 'd-m-Y') ?></li>
+												<li><label class="freelancer-info">Budget Project</label> : Rp.<?php echo number_format($project_detail->budget, 2) ?></li>
+											</ul>
+										</li>
+										<?php endif; ?>
+									<?php endforeach; ?>
+									</ol>
+									<br>
+									<?php else: ?>
+									: tidak ada<br>
+									<?php endif; ?>
+
+									<label class="freelancer-info">Project Selesai</label>
+									<?php if ($project_has_rating->num_rows() > 0): ?>
+									: 
+									<ol>
+									<?php foreach ($project_has_rating->result() as $project) : ?>
+										<?php $project_detail = $this->project->read(array('id' => $project->project_id)); ?>
+										<?php if ($project_detail->num_rows() > 0) : ?>
+											<?php $project_detail = $project_detail->row() ?>
+										<li>
+											<ul>
+												<li><label class="freelancer-info">Nama Project</label> : <?php echo $project_detail->name ?></li>
+												<li><label class="freelancer-info">Deadline</label> : <?php echo nice_date($project_detail->deadline, 'd-m-Y') ?></li>
+												<li><label class="freelancer-info">Budget Project</label> : Rp.<?php echo number_format($project_detail->budget, 2) ?></li>
+												<li><label class="freelancer-info">Rating Project</label> : <?php echo $project->rating ?></li>
+											</ul>
+										</li>
+										<?php endif; ?>
+									<?php endforeach; ?>
+									</ol>
+									<br>
+									<?php else: ?>
+									: tidak ada<br>
+									<?php endif; ?>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+								</div>
+							</div>
 						</div>
 					</div>
 					<!-- /modal -->
