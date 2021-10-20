@@ -153,8 +153,14 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function project($option = 'view', $id = NULL)
+	public function project($option = 'detail', $id = NULL)
 	{
+		$new_project = $this->input->get('new');
+
+		if (!empty($new_project))
+		{
+			$this->notification->update(array('read' => TRUE), array('uri' => '/project/detail/'.$id.'?new=true'));
+		}
 		$deadline = NULL;
 
 		if (!empty($this->input->post('deadline')))
@@ -221,7 +227,12 @@ class Admin extends CI_Controller {
 				// view
 				if ($option == 'detail')
 				{
-					$data['project'] = $this->project->read(array('id' => $id))->row();
+					$project_detail = $this->project->read(array('id' => $id))->row();
+					$data['project'] = $project_detail;
+					if (!in_array($project_detail->status, ['search-freelance', 'canceled']))
+					{
+						$data['freelancer'] = $this->freelancer_project->read(array('project_id' => $id))->row();
+					}
 					$this->template->load('project/view', $data);
 				}
 				// edit
@@ -235,7 +246,6 @@ class Admin extends CI_Controller {
 				elseif ($option == 'change_status')
 				{
 					$data['project'] = $this->project->read(array('id' => $id))->row();
-					$data['projects_category'] = $this->project_category->read()->result();
 					$this->template->load('project/change_status', $data);
 				}
 				// delete
@@ -335,29 +345,42 @@ class Admin extends CI_Controller {
 	{
 		if (!empty($id))
 		{
-			$status = $this->input->post('status');
-			$percent = str_replace('%', '', $this->input->post('percent_progress'));
+			$this->form_validation->set_rules('status', 'Status', 'trim|required');
+			$this->form_validation->set_rules('percent_progress', 'Percent Progress', 'trim|required|numeric');
+			$this->form_validation->set_rules('rating', 'Rating', 'trim|required|is_natural_no_zero');
 
-
-			if ($status == 'finished')
+			if ($this->form_validation->run() == TRUE)
 			{
-				$percent = 100;
+				$status = $this->input->post('status');
+				$percent = str_replace('%', '', $this->input->post('percent_progress'));
+
+				if ($status == 'finished')
+				{
+					$percent = 100;
+				}
+				else
+				{
+					if ($percent >= 100)
+					{
+						$status = 'finished';
+					}
+				}
+
+				$this->project->update(array(
+					'status' => $status,
+					'percent' => $percent
+				), array('id' => $id));
+
+				$this->freelancer_project->update(array('rating' => $this->input->post('rating')), array('project_id' => $id));
+
+				redirect(base_url($this->router->fetch_class().'/project'), 'refresh');
 			}
 			else
 			{
-				if ($percent >= 100)
-				{
-					$status = 'finished';
-				}
+				$data['project'] = $this->project->read(array('id' => $id))->row();
+				$this->template->load('project/change_status', $data);
 			}
-
-			$this->project->update(array(
-				'status' => $status,
-				'percent' => $percent
-			), array('id' => $id));
 		}
-
-		redirect(base_url($this->router->fetch_class().'/project'), 'refresh');
 	}
 
 	public function project_category($option = 'view', $id = NULL)
@@ -512,7 +535,7 @@ class Admin extends CI_Controller {
 	public function give_project($user_id, $project_id)
 	{
 		$this->project->update(array('status' => 'in-progress'), array('id' => $project_id));
-		$this->notification->create(array('role' => 'freelancer', 'user_id' => $user_id, 'uri' => '/project?id='.$project_id.'&new=true'));
+		$this->notification->create(array('role' => 'freelancer', 'user_id' => $user_id, 'uri' => '/project/detail/'.$project_id.'?new=true'));
 		$this->freelancer_project->create(array(
 			'user_id' => $user_id,
 			'project_id' => $project_id,

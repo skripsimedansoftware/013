@@ -36,8 +36,19 @@
 							<td>Budget</td><td>Rp.<?php echo number_format($project->budget, 2) ?></td>
 						</tr>
 						<tr>
-							<td>Deadline</td><td><?php echo $project->deadline ?></td>
+							<td>Deadline</td><td><?php echo nice_date($project->deadline, 'd-m-Y') ?></td>
 						</tr>
+						<?php if ($project->status == 'not-completed') : ?>
+						<tr>
+							<td>Percent Progress</td><td><?php echo $project->percent ?>%</td>
+						</tr>
+						<?php endif; ?>
+						<?php if (isset($freelancer)) : ?>
+						<tr>
+							<input type="hidden" name="rating" value="<?php echo $freelancer->rating ?>">
+							<td>Rating</td><td><input type="text" class="rating-view kv-svg rating-loading" data-size="xs"></td>
+						</tr>
+						<?php endif; ?>
 					</table>
 				</div>
 				<div class="box-footer">

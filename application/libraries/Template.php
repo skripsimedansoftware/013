@@ -19,6 +19,7 @@ class Template
 	{
 		$data['page'] = $this->ci->load->view($this->module.'/'.$page, $params, TRUE);
 		$data['user'] = $this->ci->user->read(array('id' => $this->ci->session->userdata($this->module)))->row();
+		$data['notification'] = $this->ci->notification->read(array('user_id' => $this->ci->session->userdata($this->module), 'read' => 0));
 		$this->ci->load->view($this->module.'/base', array_merge($data, $params), FALSE);
 	}
 }

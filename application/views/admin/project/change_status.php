@@ -26,6 +26,13 @@
 							<input type="text" name="percent_progress" class="form-control" placeholder="%">
 							<?php echo form_error('percent_progress', '<span class="help-block error">', '</span>'); ?>
 						</div>
+						<div class="form-group">
+							<label>Rating</label>
+							 <input type="text" class="rating kv-svg rating-loading" data-size="md">
+							 <br>
+							<?php echo form_error('rating', '<span class="help-block error">', '</span>'); ?>
+						</div>
+						<input type="hidden" name="rating" value="<?php echo set_value('rating', 0) ?>">
 					</div>
 					<div class="box-footer">
 						<div class="row">
@@ -39,3 +46,6 @@
 		</form>
 	</div>
 </section>
+<script type="text/javascript">
+
+</script>
