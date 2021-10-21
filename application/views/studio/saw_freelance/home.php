@@ -1,6 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>Administrator<small>Project</small></h1>
+	<h1>Studio<small>Project</small></h1>
 </section>
 
 <style type="text/css">

@@ -19,8 +19,7 @@ class Studio extends CI_Controller {
 
 	public function index()
 	{
-		$data['latest_project'] = array_slice(array_reverse($this->project->read()->result_array()), 0, 4); // limit as 4 project from last
-		$data['latest_freelancer'] = array_slice(array_reverse($this->user->read(array('role' => 'freelancer'))->result_array()), 0, 4); // limit as 4 freelance from last
+		$data['latest_project'] = array_slice(array_reverse($this->project->read(array('owner' => $this->session->userdata($this->router->fetch_class())))->result_array()), 0, 4); // limit as 4 project from last
 		$this->template->load('home', $data);
 	}
 
@@ -305,7 +304,7 @@ class Studio extends CI_Controller {
 				// read
 				else
 				{
-					$data['projects'] = $this->project->read()->result();
+					$data['projects'] = $this->project->read(array('owner' => $this->session->userdata($this->router->fetch_class())))->result();
 					$data['projects_category'] = $this->project_category->read()->result();
 					$this->template->load('project/home', $data);
 				}
