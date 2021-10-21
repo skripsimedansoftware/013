@@ -35,7 +35,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
 	<div class="register-logo">
-		<a href="<?php echo base_url() ?>">Welcome to <b>Codeigniter Starter</b></a>
+		<a href="<?php echo base_url() ?>">Welcome to <b><br>SPK Pembagian Project</b></a>
 	</div>
 
 	<div class="register-box-body">
