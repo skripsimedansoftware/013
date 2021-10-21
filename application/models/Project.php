@@ -15,6 +15,11 @@ class Project extends MY_Model
 		parent::__construct();
 		$this->set_table('project');
 	}
+
+	public function in(array $data) {
+		$this->db->where_in('id', $data);
+		return $this->db->get($this->table);
+	}
 }
 
 /* End of file Project.php */
