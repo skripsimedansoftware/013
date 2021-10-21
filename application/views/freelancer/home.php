@@ -94,7 +94,7 @@
 									}
 									?>
 									</td>
-									<td><a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project['id']) ?>"><?php echo $project['name'] ?></a></td>
+									<td><?php echo $project['name'] ?></td>
 									<td>
 										<?php
 										$project_category = $this->project_category->read(array('id' => $project['category']));
