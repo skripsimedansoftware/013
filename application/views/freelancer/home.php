@@ -1,6 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>Administrator<small>Dashboard</small></h1>
+	<h1>Freelancer<small>Dashboard</small></h1>
 </section>
 
 <!-- Main content -->

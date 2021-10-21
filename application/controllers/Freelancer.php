@@ -305,7 +305,16 @@ class Freelancer extends CI_Controller {
 				// read
 				else
 				{
-					$data['projects'] = $this->project->read()->result();
+					$my_project = array();
+					$project = $this->freelancer_project->read(array('user_id' => $this->session->userdata($this->router->fetch_class())))->result_array();
+					if (!empty($project))
+					{
+						foreach ($project as $value) {
+							array_push($my_project, $value['project_id']);
+						}
+					}
+
+					$data['projects'] = $this->project->in($my_project)->result();
 					$data['projects_category'] = $this->project_category->read()->result();
 					$this->template->load('project/home', $data);
 				}
