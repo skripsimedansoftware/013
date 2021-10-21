@@ -37,6 +37,9 @@
 					<div class="box-footer">
 						<div class="row">
 							<div class="col-lg-3">
+								<a  class="btn btn-block btn-flat btn-default"><i class="fa fa-arrow-left"></i> Back</a>
+							</div>
+							<div class="col-lg-3">
 								<button type="submit" class="btn btn-block btn-flat btn-success"><i class="fa fa-save"></i> Save</button>
 							</div>
 						</div>

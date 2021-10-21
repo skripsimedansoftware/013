@@ -38,6 +38,43 @@
 						<tr>
 							<td>Deadline</td><td><?php echo nice_date($project->deadline, 'd-m-Y') ?></td>
 						</tr>
+						<tr>
+							<td>Status</td>
+							<td>
+								<?php
+								if ($project->status == 'search-freelance')
+								{
+									?>
+									<label class="label label-primary">Mencari Pekerja</label>
+									<?php
+								}
+								elseif ($project->status == 'canceled')
+								{
+									?>
+									<label class="label label-warning">Dibatalkan</label>
+									<?php
+								}
+								elseif ($project->status == 'in-progress')
+								{
+									?>
+									<label class="label bg-navy">Mencari Pekerja</label>
+									<?php
+								}
+								elseif ($project->status == 'not-completed')
+								{
+									?>
+									<label class="label label-warning">Mencari Pekerja</label>
+									<?php
+								}
+								else
+								{
+									?>
+									<label class="label label-success">Selesai</label>
+									<?php
+								}
+								?>
+							</td>
+						</tr>
 						<?php if ($project->status == 'not-completed') : ?>
 						<tr>
 							<td>Percent Progress</td><td><?php echo $project->percent ?>%</td>

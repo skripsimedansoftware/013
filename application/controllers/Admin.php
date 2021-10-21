@@ -269,6 +269,7 @@ class Admin extends CI_Controller {
 				if ($this->form_validation->run() == TRUE)
 				{
 					$query = $this->project->create(array(
+						'owner' => $this->session->userdata($this->router->fetch_class()),
 						'name' => $this->input->post('name'),
 						'category' => $this->input->post('category'),
 						'area' => $this->input->post('area'),
