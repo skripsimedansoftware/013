@@ -314,7 +314,7 @@ class Freelancer extends CI_Controller {
 						}
 					}
 
-					$data['projects'] = $this->project->in($my_project)->result();
+					$data['projects'] = (!empty($my_project))?$this->project->in($my_project)->result():array();
 					$data['projects_category'] = $this->project_category->read()->result();
 					$this->template->load('project/home', $data);
 				}
