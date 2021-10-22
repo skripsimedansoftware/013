@@ -597,6 +597,7 @@ class Freelancer extends CI_Controller {
 			if ($this->form_validation->run() == TRUE)
 			{
 				$this->user->create(array(
+					'role' => 'freelancer',
 					'email' => $this->input->post('email'),
 					'password' => sha1($this->input->post('password')),
 					'full_name' => $this->input->post('full_name')
