@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-8 col-xs-12">
+		<div class="col-lg-12 col-xs-12">
 			<div class="box box-info">
 				<div class="box-header with-border">
 					<h3 class="box-title">Latest Project</h3>
@@ -174,34 +174,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-xs-12">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<h3 class="box-title">Recently Freelance</h3>
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-						<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-					</div>
-				</div>
-				<div class="box-body">
-					<ul class="products-list product-list-in-box">
-						<?php foreach ($latest_freelancer as $key => $freelancer): ?>
-						<li class="item">
-							<div class="product-img">
-								<img src="<?php echo (!empty($freelancer['photo']))?base_url('uploads/'.$freelancer['photo']):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" alt="User Image">
-							</div>
-							<div class="product-info">
-								<a href="javascript:void(0)" class="product-title"><?php echo $freelancer['full_name'] ?><span class="label label-warning pull-right"><?php echo $this->freelancer_project->freelance($freelancer['id'])->num_rows() ?> project</span></a>
-								<span class="product-description"><?php echo $freelancer['email'] ?></span>
-							</div>
-						</li>
-						<?php endforeach; ?>
-					</ul>
-				</div>
-			</div>
-		</div>
 	</div>
-	<div class="row">
-		<button></button>
-	</div>
+
 </section>
