@@ -103,7 +103,7 @@ desired effect
 										parse_str($parse_url['query'], $query);
 										if (isset($query['new']))
 										{
-											$project = $this->project->read(array('id' => explode('/', $parse_url['path'])[5]));
+											$project = $this->project->read(array('id' => str_replace('?new=true', '', explode('/', $value->uri)[3])));
 											if ($project->num_rows() >= 1)
 											{
 												echo 'New Project : '.$project->row()->name.'<br>';
