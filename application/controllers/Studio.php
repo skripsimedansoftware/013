@@ -534,7 +534,7 @@ class Studio extends CI_Controller {
 
 	public function give_project($user_id, $project_id)
 	{
-		$this->project->update(array('status' => 'in-progress'), array('id' => $project_id));
+		$this->project->update(array('status' => 'pending'), array('id' => $project_id));
 		$this->notification->create(array('role' => 'freelancer', 'user_id' => $user_id, 'uri' => '/project/detail/'.$project_id.'?new=true'));
 		$this->freelancer_project->create(array(
 			'user_id' => $user_id,
@@ -542,7 +542,7 @@ class Studio extends CI_Controller {
 			'rating' => NULL
 		));
 
-		$this->session->set_flashdata('project', array('status' => 'success', 'message' => 'Project akan segera dikerjakan oleh freelancer'));
+		$this->session->set_flashdata('project', array('status' => 'success', 'message' => 'Project akan segera diterima oleh freelancer'));
 		redirect(base_url($this->router->fetch_class().'/project'), 'refresh');
 	}
 

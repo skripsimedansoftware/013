@@ -96,18 +96,18 @@ desired effect
 								<ul class="menu">
 									<?php foreach ($notification->result() as $value) : ?>
 									<li><!-- start notification -->
-										<a href="<?php echo base_url($this->router->fetch_class().$value->uri) ?>"><i class="fa fa-users text-aqua"></i>
+										<a href="<?php echo base_url($this->router->fetch_class().$value->uri) ?>"><i class="fa fa-info text-aqua"></i>
 										<?php
 										$url = base_url($this->router->fetch_class().$value->uri);
 										$parse_url = parse_url($url);
 										parse_str($parse_url['query'], $query);
-										if (isset($query['new']))
+										if (isset($query['received']))
 										{
-											$project = $this->project->read(array('id' => str_replace('?new=true', '', explode('/', $value->uri)[3])));
+											$project = $this->project->read(array('id' => str_replace('?received=true', '', explode('/', $value->uri)[3])));
 											if ($project->num_rows() >= 1)
 											{
-												echo 'New Project : '.$project->row()->name.'<br>';
-												echo 'Budget : Rp.'.number_format($project->row()->budget, 2);
+												echo '<b>Project Diterima Freelancer</b><br>';
+												echo $project->row()->name;
 											}
 										}
 										?>

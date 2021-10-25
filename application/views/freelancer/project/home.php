@@ -70,6 +70,12 @@
 										<?php
 									break;
 
+									case 'pending':
+										?>
+										<a href="#" class="btn btn-block btn-flat btn-xs btn-warning">Menunggu Konfirmasi</a>
+										<?php
+									break;
+
 									case 'in-progress':
 										?>
 										<a href="#" class="btn btn-block btn-flat btn-xs bg-navy">Dalam Proses</a>
@@ -97,30 +103,7 @@
 								} ?>
 							</td>
 							<td>
-								<?php if (in_array($project->status, ['search-freelance'])) : ?>
-									<a href="<?php echo base_url($this->router->fetch_class().'/project/edit/'.$project->id) ?>" class="btn btn-flat btn-xs btn-default">Sunting</a>
-									<a href="<?php echo base_url($this->router->fetch_class().'/set_project_status/'.$project->id.'/canceled') ?>" class="btn btn-flat btn-xs btn-warning">Batalkan</a>
-								<?php endif; ?>
-								<?php switch ($project->status) {
-									case 'search-freelance':
-										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/delete/'.$project->id) ?>" class="btn btn-flat btn-xs btn-danger">Hapus</a>
-										<?php
-									break;
-
-									case 'in-progress':
-										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/change_status/'.$project->id) ?>" class="btn btn-flat btn-xs bg-maroon">Ubah Status</a>
-										<?php
-									break;
-									
-									// finished
-									default:
-										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-flat btn-xs btn-info">Detail</a>
-										<?php
-									break;
-								} ?>
+								<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-flat btn-xs btn-info">Detail</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>

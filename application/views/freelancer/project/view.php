@@ -48,6 +48,12 @@
 									<label class="label label-primary">Mencari Pekerja</label>
 									<?php
 								}
+								elseif ($project->status == 'pending')
+								{
+									?>
+									<label class="label label-warning">Menunggu Konfirmasi</label>
+									<?php
+								}
 								elseif ($project->status == 'canceled')
 								{
 									?>
@@ -92,6 +98,11 @@
 					<div class="row">
 						<div class="col-lg-3">
 							<a href="<?php echo base_url($this->router->fetch_class().'/project') ?>" class="btn btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+						</div>
+						<div class="col-lg-3 pull-right">
+							<?php if ($project->status == 'pending') : ?>
+							<a href="<?php echo base_url($this->router->fetch_class().'/set_project_status/'.$project->id) ?>" class="btn btn-success"><i class="fa fa-check"></i> Terima</a>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
