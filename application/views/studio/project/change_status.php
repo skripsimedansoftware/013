@@ -15,7 +15,7 @@
 					<div class="box-body">
 						<div class="form-group">
 							<label>Status</label>
-							<select name="status" class="form-control">
+							<select name="status" class="form-control" id="select-update-project-status">
 								<option value="finished">Finished</option>
 								<option value="not-completed">Not Completed</option>
 							</select>
@@ -23,7 +23,7 @@
 						</div>
 						<div class="form-group">
 							<label>Percent Progress</label>
-							<input type="text" name="percent_progress" class="form-control" placeholder="%">
+							<input type="text" name="percent_progress" class="form-control" placeholder="%" disabled>
 							<?php echo form_error('percent_progress', '<span class="help-block error">', '</span>'); ?>
 						</div>
 						<div class="form-group">

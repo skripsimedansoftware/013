@@ -517,6 +517,13 @@ $("input[data-type='meter']").on({
     }
 });
 
+$("#select-update-project-status").on('change', function() {
+	if (this.value == 'not-completed') {
+		$('input[name="percent_progress"]').removeAttr('disabled');
+	} else {
+		$('input[name="percent_progress"]').attr('disabled', 'disabled');
+	}
+})
 
 function formatNumber(n) {
   // format number 1000000 to 1,234,567

@@ -346,7 +346,19 @@ class Studio extends CI_Controller {
 		if (!empty($id))
 		{
 			$this->form_validation->set_rules('status', 'Status', 'trim|required');
-			$this->form_validation->set_rules('percent_progress', 'Percent Progress', 'trim|required|numeric');
+			$this->form_validation->set_rules('percent_progress', 'Percent Progress', ['trim', 'numeric', ['check_percent', function($value) {
+				if ($this->input->post('status') == 'not-completed')
+				{
+					$value = (int) $value;
+					if ($value >= 100)
+					{
+						$this->form_validation->set_message('check_percent', 'Nilai persen harus dibawah 100');
+						return FALSE;
+					}
+				}
+
+				return TRUE;
+			}]]);
 			$this->form_validation->set_rules('rating', 'Rating', 'trim|required|is_natural_no_zero');
 
 			if ($this->form_validation->run() == TRUE)
