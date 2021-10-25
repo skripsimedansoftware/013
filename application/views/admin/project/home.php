@@ -18,7 +18,7 @@
 			<?php endif; ?>
 		<?php endif; ?>
 	</div>
-	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="box">
 			<div class="box-header with-border">
 				<h3 class="box-title">List of Project</h3>
@@ -33,7 +33,6 @@
 						<th>Budget</th>
 						<th>Deadline</th>
 						<th>Status</th>
-						<th>Option</th>
 					</thead>
 					<tbody>
 						<?php foreach ($projects as $key => $project): ?>
@@ -66,7 +65,7 @@
 								<?php switch ($project->status) {
 									case 'search-freelance':
 										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/saw_freelance/'.$project->id) ?>" class="btn btn-block btn-flat btn-xs btn-primary">Cari Pekerja</a>
+										<a href="#" class="btn btn-block btn-flat btn-xs btn-primary">Mencari Pekerja</a>
 										<?php
 									break;
 
@@ -96,73 +95,10 @@
 									break;
 								} ?>
 							</td>
-							<td>
-								<?php if (in_array($project->status, ['search-freelance'])) : ?>
-									<a href="<?php echo base_url($this->router->fetch_class().'/project/edit/'.$project->id) ?>" class="btn btn-flat btn-xs btn-default">Sunting</a>
-									<a href="<?php echo base_url($this->router->fetch_class().'/set_project_status/'.$project->id.'/canceled') ?>" class="btn btn-flat btn-xs btn-warning">Batalkan</a>
-								<?php endif; ?>
-								<?php switch ($project->status) {
-									case 'search-freelance':
-										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/delete/'.$project->id) ?>" class="btn btn-flat btn-xs btn-danger">Hapus</a>
-										<?php
-									break;
-
-									case 'in-progress':
-										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/change_status/'.$project->id) ?>" class="btn btn-flat btn-xs bg-maroon">Ubah Status</a>
-										<?php
-									break;
-									
-									// finished
-									default:
-										?>
-										<a href="<?php echo base_url($this->router->fetch_class().'/project/detail/'.$project->id) ?>" class="btn btn-flat btn-xs btn-info">Detail</a>
-										<?php
-									break;
-								} ?>
-							</td>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
 				</table>
-			</div>
-			<div class="box-footer">
-				<div class="row">
-					<div class="col-lg-3">
-						<a href="<?php echo base_url($this->router->fetch_class().'/project/add') ?>" class="btn btn-block btn-flat btn-success"><i class="fa fa-plus"></i> Add Project</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-		<div class="box">
-			<div class="box-header with-border">
-				<h3 class="box-title">Project Category</h3>
-			</div>
-			<div class="box-body">
-				<table class="table table-hover table-striped table-condensed table-bordered">
-					<thead>
-						<th>Name</th>
-						<th>Option</th>
-					</thead>
-					<tbody id="project-category-list">
-						<?php foreach ($projects_category as $project_category): ?>
-						<tr>
-							<td><?php echo $project_category->name ?></td>
-							<td>
-								<button class="btn btn-xs btn-default modal-category-edit" onclick="category_edit(<?php echo $project_category->id ?>)" data-id="<?php echo $project_category->id ?>" data-toggle="modal" data-target="#modal-category"><i class="fa fa-edit"></i></button>
-								&nbsp;&nbsp;
-								<button class="btn btn-xs btn-danger modal-category-delete" onclick="category_delete(<?php echo $project_category->id ?>)" data-id="<?php echo $project_category->id ?>"><i class="fa fa-trash-o"></i></button>
-							</td>
-						</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-			</div>
-			<div class="box-footer">
-				<button class="btn btn-primary btn-flat btn-block" data-toggle="modal" data-target="#modal-category" id="modal-category-add"><i class="fa fa-plus"></i> Add Category</button>
 			</div>
 		</div>
 	</div>
