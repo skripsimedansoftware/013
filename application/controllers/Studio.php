@@ -154,11 +154,11 @@ class Studio extends CI_Controller {
 
 	public function project($option = 'detail', $id = NULL)
 	{
-		$new_project = $this->input->get('new');
+		$received_project = $this->input->get('received');
 
-		if (!empty($new_project))
+		if (!empty($received_project))
 		{
-			$this->notification->update(array('read' => TRUE), array('uri' => '/project/detail/'.$id.'?new=true'));
+			$this->notification->update(array('read' => TRUE), array('uri' => '/project/detail/'.$id.'?received=true'));
 		}
 		$deadline = NULL;
 
