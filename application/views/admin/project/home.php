@@ -69,6 +69,12 @@
 										<?php
 									break;
 
+									case 'pending':
+										?>
+										<a href="#" class="btn btn-block btn-flat btn-xs btn-warning">Menunggu Konfirmasi</a>
+										<?php
+									break;
+
 									case 'in-progress':
 										?>
 										<a href="#" class="btn btn-block btn-flat btn-xs bg-navy">Dalam Proses</a>
