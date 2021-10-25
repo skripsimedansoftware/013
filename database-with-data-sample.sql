@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2021 at 09:22 PM
+-- Generation Time: Oct 25, 2021 at 11:41 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -162,7 +162,7 @@ CREATE TABLE `project` (
   `deadline` date DEFAULT NULL,
   `percent` int(3) DEFAULT NULL,
   `temp-change` longtext DEFAULT NULL,
-  `status` enum('search-freelance','canceled','in-progress','not-completed','finished') NOT NULL
+  `status` enum('search-freelance','pending','canceled','in-progress','not-completed','finished') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
