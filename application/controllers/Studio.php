@@ -191,15 +191,15 @@ class Studio extends CI_Controller {
 			{
 				$this->form_validation->set_rules('name', 'Nama Project', 'trim|required|max_length[40]');
 				$this->form_validation->set_rules('category', 'Kategori Project', 'trim|required|integer', array('integer' => 'Bidang {field} dibutuhkan.'));
-				$this->form_validation->set_rules('budget', 'Project Budget', 'trim|required|numeric');
+				$this->form_validation->set_rules('budget', 'Project Budget', 'trim|required');
 
 				if ($this->form_validation->run() == TRUE)
 				{
 					$query = $this->project->update(array(
 						'name' => $this->input->post('name'),
 						'category' => $this->input->post('category'),
-						'area' => $this->input->post('area'),
-						'budget' => $this->input->post('budget'),
+						'area' => str_replace(',', '', $this->input->post('area')),
+						'budget' => str_replace(',', '', $this->input->post('budget')),
 						'deadline' => $deadline
 					), array('id' => $id));
 
@@ -263,7 +263,7 @@ class Studio extends CI_Controller {
 			{
 				$this->form_validation->set_rules('name', 'Nama Project', 'trim|required|max_length[40]');
 				$this->form_validation->set_rules('category', 'Kategori Project', 'trim|required|integer', array('integer' => 'Bidang {field} dibutuhkan.'));
-				$this->form_validation->set_rules('budget', 'Project Budget', 'trim|required|numeric');
+				$this->form_validation->set_rules('budget', 'Project Budget', 'trim|required');
 
 				if ($this->form_validation->run() == TRUE)
 				{
@@ -271,8 +271,8 @@ class Studio extends CI_Controller {
 						'owner' => $this->session->userdata($this->router->fetch_class()),
 						'name' => $this->input->post('name'),
 						'category' => $this->input->post('category'),
-						'area' => $this->input->post('area'),
-						'budget' => $this->input->post('budget'),
+						'area' => str_replace(',', '', $this->input->post('area')),
+						'budget' => str_replace(',', '', $this->input->post('budget')),
 						'deadline' => $deadline
 					));
 

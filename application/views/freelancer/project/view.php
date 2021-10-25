@@ -30,7 +30,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Area</td><td><?php echo $project->area ?></td>
+							<td>Area</td><td><?php echo $project->area ?>m²</td>
 						</tr>
 						<tr>
 							<td>Budget</td><td>Rp.<?php echo number_format($project->budget, 2) ?></td>

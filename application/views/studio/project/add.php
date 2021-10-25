@@ -30,12 +30,12 @@
 						</div>
 						<div class="form-group">
 							<label>Area</label>
-							<input type="text" class="form-control" name="area" placeholder="Project Area" value="<?php echo set_value('area') ?>">
+							<input type="text" class="form-control" name="area" placeholder="Project Area" value="<?php echo set_value('area') ?>" data-type="meter">
 							<?php echo form_error('area', '<span class="help-block error">', '</span>'); ?>
 						</div>
 						<div class="form-group">
 							<label>Budget</label>
-							<input type="text" class="form-control" name="budget" placeholder="Project Budget" value="<?php echo set_value('budget') ?>">
+							<input type="text" class="form-control" name="budget" placeholder="Project Budget" value="<?php echo set_value('budget') ?>" data-type="currency">
 							<?php echo form_error('budget', '<span class="help-block error">', '</span>'); ?>
 						</div>
 						<div class="form-group">

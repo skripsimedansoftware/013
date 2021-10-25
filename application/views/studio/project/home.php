@@ -47,7 +47,7 @@
 								echo ($project_category->num_rows() >= 1)?$project_category->row()->name:'-';
 								?>
 							</td>
-							<td><?php echo $project->area ?></td>
+							<td><?php echo $project->area ?>m²</td>
 							<td>Rp.<?php echo number_format($project->budget, 2) ?></td>
 							<td>
 								<?php

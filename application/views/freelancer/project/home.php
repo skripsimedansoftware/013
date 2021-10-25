@@ -18,7 +18,7 @@
 			<?php endif; ?>
 		<?php endif; ?>
 	</div>
-	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="box">
 			<div class="box-header with-border">
 				<h3 class="box-title">List of Project</h3>
@@ -47,7 +47,7 @@
 								echo ($project_category->num_rows() >= 1)?$project_category->row()->name:'-';
 								?>
 							</td>
-							<td><?php echo $project->area ?></td>
+							<td><?php echo $project->area ?>m²</td>
 							<td>Rp.<?php echo number_format($project->budget, 2) ?></td>
 							<td>
 								<?php
@@ -126,43 +126,6 @@
 						<?php endforeach; ?>
 					</tbody>
 				</table>
-			</div>
-			<div class="box-footer">
-				<div class="row">
-					<div class="col-lg-3">
-						<a href="<?php echo base_url($this->router->fetch_class().'/project/add') ?>" class="btn btn-block btn-flat btn-success"><i class="fa fa-plus"></i> Add Project</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-		<div class="box">
-			<div class="box-header with-border">
-				<h3 class="box-title">Project Category</h3>
-			</div>
-			<div class="box-body">
-				<table class="table table-hover table-striped table-condensed table-bordered">
-					<thead>
-						<th>Name</th>
-						<th>Option</th>
-					</thead>
-					<tbody id="project-category-list">
-						<?php foreach ($projects_category as $project_category): ?>
-						<tr>
-							<td><?php echo $project_category->name ?></td>
-							<td>
-								<button class="btn btn-xs btn-default modal-category-edit" onclick="category_edit(<?php echo $project_category->id ?>)" data-id="<?php echo $project_category->id ?>" data-toggle="modal" data-target="#modal-category"><i class="fa fa-edit"></i></button>
-								&nbsp;&nbsp;
-								<button class="btn btn-xs btn-danger modal-category-delete" onclick="category_delete(<?php echo $project_category->id ?>)" data-id="<?php echo $project_category->id ?>"><i class="fa fa-trash-o"></i></button>
-							</td>
-						</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-			</div>
-			<div class="box-footer">
-				<button class="btn btn-primary btn-flat btn-block" data-toggle="modal" data-target="#modal-category" id="modal-category-add"><i class="fa fa-plus"></i> Add Category</button>
 			</div>
 		</div>
 	</div>
