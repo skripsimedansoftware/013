@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2021 at 01:49 AM
+-- Generation Time: Oct 25, 2021 at 09:22 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.3.29
 
@@ -213,14 +213,14 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `role`, `email`, `username`, `password`, `full_name`, `photo`) VALUES
 (1, 'admin', 'agungmasda29@gmail.com', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', NULL),
-(2, 'freelancer', 'OXoqvG@gmai.com', 'OeHd2f', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'Lina P.', NULL),
+(2, 'studio', 'OXoqvG@gmai.com', 'studio', '9a12c50f2f23af9f1a313af952aee2b30627ac7b', 'Lina P.', NULL),
 (3, 'freelancer', 'QjZLGW@gmai.com', 'GVqYLy', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'A. Alfian', NULL),
 (4, 'freelancer', 'En6XlJ@gmai.com', 'u3Bf0R', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'Yuna D.', NULL),
 (5, 'freelancer', '8jFXS4@gmai.com', 'GfOXVv', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'M. Tantri ', NULL),
 (6, 'freelancer', 'JRXZM4@gmai.com', '4kcPib', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'M. Zaki', NULL),
 (7, 'freelancer', 'TPvlEi@gmai.com', 'NtPsUo', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'Bella M.', NULL),
 (8, 'freelancer', 'UAXgn7@gmai.com', 'o6948t', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'James', NULL),
-(9, 'freelancer', 'xWau2d@gmai.com', '0noWZi', '11f6ad8ec52a2984abaafd7c3b516503785c2072', 'Nina P.', NULL);
+(9, 'freelancer', 'xWau2d@gmai.com', 'freelancer', '9d329da7ff79fae4001abaaace252a11ae9a8e85', 'Nina P.', NULL);
 
 --
 -- Indexes for dumped tables
