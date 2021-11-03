@@ -348,7 +348,7 @@ class Freelancer extends CI_Controller {
 			{
 				$project_detail = $this->project->read(array('id' => $id))->row();
 				$this->notification->create(array('role' => 'studio', 'user_id' => $project_detail->owner, 'uri' => '/project/detail/'.$project_detail->id.'?received=true'));
-				$this->session->set_flashdata('project', array('status' => 'success', 'message' => 'Project telah diterima, selamat mengerjakan!!'));
+				// $this->session->set_flashdata('project', array('status' => 'success', 'message' => 'Project telah diterima, selamat mengerjakan!!'));
 			}
 			elseif ($status == 'not-completed')
 			{
