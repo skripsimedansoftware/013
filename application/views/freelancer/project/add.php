@@ -30,7 +30,7 @@
 						</div>
 						<div class="form-group">
 							<label>Area</label>
-							<input type="text" class="form-control" name="area" placeholder="Project Area" value="<?php echo set_value('area') ?>">
+							<input type="text" class="form-control" name="area" placeholder="m²" value="<?php echo set_value('area') ?>">
 							<?php echo form_error('area', '<span class="help-block error">', '</span>'); ?>
 						</div>
 						<div class="form-group">
