@@ -39,7 +39,7 @@
 			<?php
 		}
 		?>
-		<form action="<?php echo base_url($this->router->fetch_class().'/login') ?>" method="post">
+		<form action="<?php echo base_url() ?>" method="post">
 			<div class="form-group has-feedback">
 				<input type="text" class="form-control" placeholder="Email / Nama Pengguna" name="identity" value="<?php echo set_value('identity') ?>">
 				<span class="fa fa-user form-control-feedback"></span>
@@ -55,13 +55,13 @@
 					<button type="submit" class="btn btn-primary btn-block btn-flat">Masuk <i class="fa fa-sign-in"></i></button>
 				</div>
 				<div class="col-lg-6 col-xs-12">
-					<a href="<?php echo base_url('admin/register') ?>" class="btn btn-default btn-block btn-flat"><i class="fa fa-users"></i> Mendaftar</a>
+					<a href="<?php echo base_url($this->router->fetch_class().'/register') ?>" class="btn btn-default btn-block btn-flat"><i class="fa fa-users"></i> Mendaftar</a>
 				</div>
 			</div>
 		</form>
 		<br>
 		<a href="<?php echo base_url() ?>" class="text-center"><i class="fa fa-arrow-left"></i> Beranda</a>
-		<a href="<?php echo base_url('admin/forgot_password') ?>" class="text-center pull-right"><i class="fa fa-lock"></i> Lupa Kata Sandi?</a>
+		<a href="<?php echo base_url($this->router->fetch_class().'/forgot_password') ?>" class="text-center pull-right"><i class="fa fa-lock"></i> Lupa Kata Sandi?</a>
 
 	</div>
 </div>

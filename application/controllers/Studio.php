@@ -23,45 +23,6 @@ class Studio extends CI_Controller {
 		$this->template->load('home', $data);
 	}
 
-	public function login()
-	{
-		if ($this->input->method() == 'post')
-		{
-			$this->form_validation->set_rules('identity', 'Email / Nama Pengguna', 'trim|required');
-			$this->form_validation->set_rules('password', 'Kata Sandi', 'trim|required');
-			if ($this->form_validation->run() == TRUE)
-			{
-				$user = $this->user->sign_in($this->input->post('identity'), $this->input->post('password'));
-				if ($user->num_rows() >= 1)
-				{
-					$this->session->set_userdata(strtolower($this->router->fetch_class()), $user->row()->id);
-					redirect(base_url($this->router->fetch_class()), 'refresh');
-				}
-				else
-				{
-					if ($this->user->search($this->input->post('identity'))->num_rows() >= 1)
-					{
-						$this->session->set_flashdata('login', array('status' => 'failed', 'message' => 'Kata sandi tidak sesuai'));
-						redirect(base_url($this->router->fetch_class().'/'.$this->router->fetch_method()), 'refresh');
-					}
-					else
-					{
-						$this->session->set_flashdata('login', array('status' => 'failed', 'message' => 'Akun tidak ditemukan'));
-						redirect(base_url($this->router->fetch_class().'/'.$this->router->fetch_method()), 'refresh');
-					}
-				}
-			}
-			else
-			{
-				$this->load->view('studio/login');
-			}
-		}
-		else
-		{
-			$this->load->view('studio/login');
-		}
-	}
-
 	public function profile($id = NULL, $option = NULL)
 	{
 		$data['profile'] = $this->user->read(array('id' => (!empty($id))?$id:$this->session->userdata(strtolower($this->router->fetch_class()))))->row();
@@ -585,7 +546,7 @@ class Studio extends CI_Controller {
 	public function logout()
 	{
 		session_destroy();
-		redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
+		redirect(base_url('web'), 'refresh');
 	}
 
 	public function register()
