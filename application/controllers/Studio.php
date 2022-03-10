@@ -12,7 +12,7 @@ class Studio extends CI_Controller {
 		{
 			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'reset_password']))
 			{
-				redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
+				redirect(base_url('web/login'), 'refresh');
 			}
 		}
 	}
