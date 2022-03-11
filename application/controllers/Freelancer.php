@@ -12,7 +12,7 @@ class Freelancer extends CI_Controller {
 		{
 			if (!in_array($this->router->fetch_method(), ['login', 'register', 'forgot_password', 'reset_password']))
 			{
-				redirect(base_url('web/login'), 'refresh');
+				redirect(base_url('web'), 'refresh');
 			}
 		}
 	}
@@ -115,6 +115,27 @@ class Freelancer extends CI_Controller {
 				else
 				{
 					$this->template->load('profile_edit', $data);
+				}
+			break;
+
+			case 'criteria':
+				foreach ($this->input->post() as $key => $criteria)
+				{
+					$criteria_name = explode('_', $key);
+					if ($criteria_name[0] == 'criteria')
+					{
+						$has_weight = $this->alternative_data->read(array('user_id' => $id, 'criteria_id' => $criteria_name[1]));
+						if ($has_weight->num_rows() >= 1)
+						{
+							$this->alternative_data->update(array('weight' => $criteria), array('id' => $has_weight->row()->id));
+						}
+						else
+						{
+							$this->alternative_data->create(array('weight' => $criteria, 'user_id' => $id, 'criteria_id' => $criteria_name[1]));
+						}
+					}
+
+					redirect(base_url($this->router->fetch_class().'/profile'), 'refresh');
 				}
 			break;
 

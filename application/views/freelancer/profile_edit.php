@@ -4,6 +4,9 @@
 
 <section class="content container-fluid">
 	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">Profil Akun</h3>
+		</div>
 		<form method="POST" action="<?php echo base_url($this->router->fetch_class().'/profile/'.$this->uri->segment(3).'/edit') ?>" enctype="multipart/form-data">
 			<div class="box-body">
 				<div class="col-lg-6">
@@ -31,6 +34,41 @@
 						<img  class="img img-responsive img-circle" id="profile-upload-preview" src="<?php echo (!empty($profile->photo))?base_url('uploads/'.$profile->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" alt="your image" style="margin-bottom: 2%; height:160px;width: 160px;">
 						<input type="file" onchange="readURL(this);" name="photo">
 					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div class="col-lg-2 col-sm-12">
+					<button type="submit" class="btn btn-block btn-success">Simpan</button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">Profil Freelancer</h3>
+		</div>
+		<form method="POST" action="<?php echo base_url($this->router->fetch_class().'/profile/'.$this->uri->segment(3).'/criteria') ?>">
+			<div class="box-body">
+				<div class="col-lg-6">
+					<?php foreach ($this->criteria->read()->result() as $criteria) :?>
+					<?php
+					$criteria_value = $this->alternative_data->read(array('user_id' => $profile->id, 'criteria_id' => $criteria->id));
+					if ($criteria_value->num_rows() >= 1)
+					{
+						$criteria_value = $criteria_value->row()->weight;
+					}
+					else
+					{
+						$criteria_value = 0;
+					}
+					?>
+					<div class="form-group">
+						<label><?= $criteria->name ?></label>
+						<input class="form-control" type="text" name="criteria_<?= $criteria->id ?>" placeholder="<?= $criteria->name ?>" value="<?php echo set_value('criteria_'.$criteria->id, $criteria_value) ?>">
+						<?php echo form_error('criteria_'.$criteria->id, '<span class="help-block error">', '</span>'); ?>
+					</div>
+					<?php endforeach; ?>
 				</div>
 			</div>
 			<div class="box-footer">

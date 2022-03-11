@@ -133,7 +133,7 @@ desired effect
 							<!-- The user image in the menu -->
 							<li class="user-header">
 								<img src="<?php echo (!empty($user->photo))?base_url('uploads/'.$user->photo):base_url('assets/adminlte/dist/img/user2-160x160.jpg') ?>" class="img-circle" alt="User Image">
-								<p><?php echo $user->full_name ?> - ADMIN</p>
+								<p><?php echo $user->full_name ?> - FREELANCER</p>
 							</li>
 							<!-- Menu Footer-->
 							<li class="user-footer">
@@ -169,17 +169,6 @@ desired effect
 					<a href="#"><i class="fa fa-circle text-success"></i> online</a>
 				</div>
 			</div>
-
-			<!-- search form (Optional) -->
-			<form action="#" method="get" class="sidebar-form">
-				<div class="input-group">
-					<input type="text" name="q" class="form-control" placeholder="Search...">
-					<span class="input-group-btn">
-						<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-					</span>
-				</div>
-			</form>
-			<!-- /.search form -->
 
 			<!-- Sidebar Menu -->
 			<ul class="sidebar-menu" data-widget="tree">
