@@ -1,6 +1,6 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>Administrator<small>Project</small></h1>
+	<h1>Studio<small>Project</small></h1>
 </section>
 
 <style type="text/css">
@@ -23,12 +23,21 @@ label.freelancer-info {
 				$saw->addCriteria($criteria->attribute, $criteria->weight, $criteria->name);
 			endforeach;
 
+			$saw->addCriteria('cost', 25, 'Banyaknya proyek yang dikerjakan');
 
 			foreach ($this->user->read(array('role' => 'freelancer'))->result() as $user) :
 				$user_criteria = array();
 				foreach ($this->criteria->read()->result() as $criteria) :
 					array_push($user_criteria, $this->alternative_data->read(array('user_id' => $user->id, 'criteria_id' => $criteria->id))->row()->weight);
 				endforeach;
+				$user_project = $this->freelancer_project->count(array('user_id' => $user->id, 'rating' => NULL));
+
+				if ($user_project == 0)
+				{
+					$user_project = 1;
+				}
+
+				array_push($user_criteria, $user_project);
 				$saw->addAlternative((array) $user, $user_criteria);
 			endforeach;
 
@@ -85,7 +94,6 @@ label.freelancer-info {
 			}
 
 			$normalized_r['preference'] = array_chunk($normalized_r['preference'], count($saw->getCriteria()->get()));
-
 
 			foreach ($saw->getCriteria()->get() as $criteria_key => $criteria)
 			{
@@ -147,7 +155,7 @@ label.freelancer-info {
 				<thead>
 					<th>No</th>
 					<th>Freelancer</th>
-					<?php 
+					<?php
 					$i = 1;
 					foreach ($saw->getCriteria()->get() as $criteria_key => $criteria) : ?>
 					<th>C<?php echo ($criteria_key+1) ?></th>
@@ -162,7 +170,7 @@ label.freelancer-info {
 						<td><?php echo $alternative['criteria'][$criteria_key] ?></td>
 						<?php endforeach; ?>
 					</tr>
-					<?php 
+					<?php
 					$i++;
 					endforeach;
 					?>
@@ -222,7 +230,7 @@ label.freelancer-info {
 									<label class="freelancer-info">Nama Lengkap</label> : <?php echo $freelancer['data']['full_name'] ?><br>
 									<label class="freelancer-info">Project Berjalan</label>
 									<?php if ($project_on_going->num_rows() > 0): ?>
-									: 
+									:
 									<ol>
 									<?php foreach ($project_on_going->result() as $project) : ?>
 										<?php $project_detail = $this->project->read(array('id' => $project->project_id)); ?>
@@ -245,7 +253,7 @@ label.freelancer-info {
 
 									<label class="freelancer-info">Project Selesai</label>
 									<?php if ($project_has_rating->num_rows() > 0): ?>
-									: 
+									:
 									<ol>
 									<?php foreach ($project_has_rating->result() as $project) : ?>
 										<?php $project_detail = $this->project->read(array('id' => $project->project_id)); ?>
