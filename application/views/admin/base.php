@@ -176,6 +176,7 @@ desired effect
 				<!-- Optionally, you can add icons to the links -->
 				<li class="<?php echo $this->router->fetch_method() == 'index'?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class()) ?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
 				<li class="<?php echo (in_array($this->router->fetch_method(), ['project', 'saw_freelance']))?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class().'/project') ?>"><i class="fa fa-map"></i> <span>Project</span></a></li>
+				<li class="<?php echo $this->router->fetch_method() == 'freelancer_criteria'?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class().'/freelancer_criteria') ?>"><i class="fa fa-users"></i> <span>Freelancer</span></a></li>
 				<li class="<?php echo $this->router->fetch_method() == 'criteria'?'active':'' ?>"><a href="<?php echo base_url($this->router->fetch_class().'/criteria') ?>"><i class="fa fa-puzzle-piece"></i> <span>Criteria</span></a></li>
 			</ul>
 			<!-- /.sidebar-menu -->

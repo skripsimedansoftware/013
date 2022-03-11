@@ -114,6 +114,46 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function freelancer_criteria($option = 'view', $id = NULL)
+	{
+		switch ($option)
+		{
+			case 'edit':
+				$data['freelancer'] = $this->user->read(array('role' => 'freelancer', 'id' => $id))->row();
+				if ($this->input->method() == 'post')
+				{
+					foreach ($this->input->post() as $key => $criteria)
+					{
+						$criteria_name = explode('_', $key);
+						if ($criteria_name[0] == 'criteria')
+						{
+							$has_weight = $this->alternative_data->read(array('user_id' => $id, 'criteria_id' => $criteria_name[1]));
+							if ($has_weight->num_rows() >= 1)
+							{
+								$this->alternative_data->update(array('weight' => $criteria), array('id' => $has_weight->row()->id));
+							}
+							else
+							{
+								$this->alternative_data->create(array('weight' => $criteria, 'user_id' => $id, 'criteria_id' => $criteria_name[1]));
+							}
+						}
+					}
+
+					redirect(base_url($this->router->fetch_class().'/'.$this->router->fetch_method()), 'refresh');
+				}
+				else
+				{
+					$this->template->load('freelancer/edit', $data);
+				}
+			break;
+
+			default:
+				$data['freelancers'] = $this->user->read(array('role' => 'freelancer'))->result();
+				$this->template->load('freelancer/home', $data);
+			break;
+		}
+	}
+
 	public function project($option = 'detail', $id = NULL)
 	{
 		$new_project = $this->input->get('new');
@@ -122,6 +162,7 @@ class Admin extends CI_Controller {
 		{
 			$this->notification->update(array('read' => TRUE), array('uri' => '/project/detail/'.$id.'?new=true'));
 		}
+
 		$deadline = NULL;
 
 		if (!empty($this->input->post('deadline')))
