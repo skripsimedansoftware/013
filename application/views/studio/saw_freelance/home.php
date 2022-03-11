@@ -23,12 +23,21 @@ label.freelancer-info {
 				$saw->addCriteria($criteria->attribute, $criteria->weight, $criteria->name);
 			endforeach;
 
+			$saw->addCriteria('cost', 25, 'Banyaknya proyek yang dikerjakan');
 
 			foreach ($this->user->read(array('role' => 'freelancer'))->result() as $user) :
 				$user_criteria = array();
 				foreach ($this->criteria->read()->result() as $criteria) :
 					array_push($user_criteria, $this->alternative_data->read(array('user_id' => $user->id, 'criteria_id' => $criteria->id))->row()->weight);
 				endforeach;
+				$user_project = $this->freelancer_project->count(array('user_id' => $user->id, 'rating' => NULL));
+
+				if ($user_project == 0)
+				{
+					$user_project = 1;
+				}
+
+				array_push($user_criteria, $user_project);
 				$saw->addAlternative((array) $user, $user_criteria);
 			endforeach;
 
@@ -85,7 +94,6 @@ label.freelancer-info {
 			}
 
 			$normalized_r['preference'] = array_chunk($normalized_r['preference'], count($saw->getCriteria()->get()));
-
 
 			foreach ($saw->getCriteria()->get() as $criteria_key => $criteria)
 			{
