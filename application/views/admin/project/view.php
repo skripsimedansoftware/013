@@ -63,13 +63,13 @@
 								elseif ($project->status == 'in-progress')
 								{
 									?>
-									<label class="label bg-navy">Mencari Pekerja</label>
+									<label class="label bg-navy">Dalam Proses</label>
 									<?php
 								}
 								elseif ($project->status == 'not-completed')
 								{
 									?>
-									<label class="label label-warning">Mencari Pekerja</label>
+									<label class="label label-warning">Tidak Selesai</label>
 									<?php
 								}
 								else
@@ -86,6 +86,32 @@
 							<td>Percent Progress</td><td><?php echo $project->percent ?>%</td>
 						</tr>
 						<?php endif; ?>
+						<tr>
+							<td>Freelancer</td>
+							<td>
+								<?php
+								$freelancer_project = $this->freelancer_project->read(array('project_id' => $project->id));
+								if ($freelancer_project->num_rows() >= 1)
+								{
+									$freelancer_project = $freelancer_project->row();
+									$user_freelancer = $this->user->read(array('id' => $freelancer_project->user_id));
+									if ($user_freelancer->num_rows() >= 1)
+									{
+										$user_freelancer = $user_freelancer->row();
+										echo $user_freelancer->full_name;
+									}
+									else
+									{
+										echo 'Tidak Ditemukan';
+									}
+								}
+								else
+								{
+									echo 'Tidak Ditemukan';
+								}
+								?>
+							</td>
+						</tr>
 						<?php if (isset($freelancer)) : ?>
 						<tr>
 							<input type="hidden" name="rating" value="<?php echo $freelancer->rating ?>">

@@ -63,13 +63,13 @@
 								elseif ($project->status == 'in-progress')
 								{
 									?>
-									<label class="label bg-navy">Mencari Pekerja</label>
+									<label class="label bg-navy">Dalam Proses</label>
 									<?php
 								}
 								elseif ($project->status == 'not-completed')
 								{
 									?>
-									<label class="label label-warning">Mencari Pekerja</label>
+									<label class="label label-warning">Tidak Selesai</label>
 									<?php
 								}
 								else

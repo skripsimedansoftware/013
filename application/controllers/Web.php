@@ -44,12 +44,12 @@ class Web extends CI_Controller {
 					if ($this->user->search($this->input->post('identity'))->num_rows() >= 1)
 					{
 						$this->session->set_flashdata('login', array('status' => 'failed', 'message' => 'Kata sandi tidak sesuai'));
-						redirect(base_url($user->row()->role.'/'.$this->router->fetch_method()), 'refresh');
+						redirect(base_url(), 'refresh');
 					}
 					else
 					{
 						$this->session->set_flashdata('login', array('status' => 'failed', 'message' => 'Akun tidak ditemukan'));
-						redirect(base_url($user->row()->role.'/'.$this->router->fetch_method()), 'refresh');
+						redirect(base_url(), 'refresh');
 					}
 				}
 			}

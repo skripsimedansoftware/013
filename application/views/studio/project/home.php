@@ -28,6 +28,7 @@
 					<thead>
 						<th>No</th>
 						<th>Name</th>
+						<th>Freelancer</th>
 						<th>Category</th>
 						<th>Area</th>
 						<th>Budget</th>
@@ -40,6 +41,29 @@
 						<tr>
 							<td><?php echo $key+1 ?></td>
 							<td><?php echo $project->name ?></td>
+							<td>
+								<?php
+								$freelancer_project = $this->freelancer_project->read(array('project_id' => $project->id));
+								if ($freelancer_project->num_rows() >= 1)
+								{
+									$freelancer_project = $freelancer_project->row();
+									$freelancer = $this->user->read(array('id' => $freelancer_project->user_id));
+									if ($freelancer->num_rows() >= 1)
+									{
+										$freelancer = $freelancer->row();
+										echo $freelancer->full_name;
+									}
+									else
+									{
+										echo 'Tidak Ditemukan';
+									}
+								}
+								else
+								{
+									echo 'Tidak Ditemukan';
+								}
+								?>
+							</td>
 							<td>
 								<?php
 								$project_category = $this->project_category->read(array('id' => $project->category));
