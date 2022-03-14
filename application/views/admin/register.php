@@ -41,11 +41,19 @@
 	<div class="register-box-body">
 		<p class="login-box-msg">Pendaftaran</p>
 
-		<form action="<?php echo base_url($this->router->fetch_class().'/register') ?>" method="post">
+		<form action="<?php echo base_url('web/register') ?>" method="post">
 			<div class="form-group has-feedback">
 				<input type="text" class="form-control" placeholder="Nama Lengkap" name="full_name" value="<?php echo set_value('full_name') ?>">
 				<span class="glyphicon glyphicon-user form-control-feedback"></span>
 				<?php echo form_error('full_name', '<span class="help-block error">', '</span>'); ?>
+			</div>
+			<div class="form-group has-feedback">
+				<select class="form-control" name="role">
+					<option value="">- LEVEL -</option>
+					<option value="studio">Studio</option>
+					<option value="freelancer">Freelancer</option>
+				</select>
+				<?php echo form_error('role', '<span class="help-block error">', '</span>'); ?>
 			</div>
 			<div class="form-group has-feedback">
 				<input type="email" class="form-control" placeholder="Email" name="email" value="<?php echo set_value('email') ?>">
@@ -67,7 +75,7 @@
 		</form>
 
 		<br>
-		<a href="<?php echo base_url('admin/login') ?>" class="text-center"><i class="fa fa-user-circle"></i> Saya sudah terdaftar</a>
+		<a href="<?php echo base_url('web') ?>" class="text-center"><i class="fa fa-user-circle"></i> Saya sudah terdaftar</a>
 	</div>
 	<!-- /.form-box -->
 </div>
