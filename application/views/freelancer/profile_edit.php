@@ -44,7 +44,7 @@
 		</form>
 	</div>
 
-	<div class="box">
+	<!-- <div class="box">
 		<div class="box-header with-border">
 			<h3 class="box-title">Profil Freelancer</h3>
 		</div>
@@ -77,5 +77,5 @@
 				</div>
 			</div>
 		</form>
-	</div>
+	</div> -->
 </section>

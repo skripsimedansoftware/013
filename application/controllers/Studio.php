@@ -522,7 +522,7 @@ class Studio extends CI_Controller {
 	public function is_owned_data($val, $str)
 	{
 		$str = explode('.', $str);
-		$data = $this->db->get('user', array($str[1] => $val));
+		$data = $this->db->get_where('user', array($str[1] => $val));
 		if ($data->num_rows() >= 1)
 		{
 			if ($data->row()->id == $str[2])
