@@ -83,7 +83,7 @@ class Web extends CI_Controller {
 				));
 
 				$this->session->set_flashdata('register', array('status' => 'success', 'message' => 'Pendaftaran berhasil!!'));
-				redirect(base_url($this->router->fetch_class().'/login'), 'refresh');
+				redirect(base_url($this->router->fetch_class()), 'refresh');
 			}
 			else
 			{
