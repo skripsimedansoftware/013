@@ -70,6 +70,7 @@ class Web extends CI_Controller {
 		{
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[user.email]|max_length[40]', array('is_unique' => 'Email sudah terdaftar!'));
 			$this->form_validation->set_rules('full_name', 'Nama Lengkap', 'trim|required|max_length[40]');
+			$this->form_validation->set_rules('username', 'Username', 'trim|max_length[20]|is_unique[user.username]|required');
 			$this->form_validation->set_rules('role', 'Level', 'trim|required');
 			$this->form_validation->set_rules('password', 'Kata Sandi', 'trim|required');
 
@@ -78,6 +79,7 @@ class Web extends CI_Controller {
 				$this->user->create(array(
 					'role' => $this->input->post('role'),
 					'email' => $this->input->post('email'),
+					'username' => $this->input->post('username'),
 					'password' => sha1($this->input->post('password')),
 					'full_name' => $this->input->post('full_name')
 				));

@@ -61,6 +61,11 @@
 				<?php echo form_error('email', '<span class="help-block error">', '</span>'); ?>
 			</div>
 			<div class="form-group has-feedback">
+				<input type="text" class="form-control" placeholder="Username" name="username" value="<?php echo set_value('username') ?>">
+				<span class="glyphicon glyphicon-at form-control-feedback"></span>
+				<?php echo form_error('username', '<span class="help-block error">', '</span>'); ?>
+			</div>
+			<div class="form-group has-feedback">
 				<input type="password" class="form-control" placeholder="Kata Sandi" name="password" value="<?php echo set_value('password') ?>">
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				<?php echo form_error('password', '<span class="help-block error">', '</span>'); ?>
