@@ -121,6 +121,9 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="box-footer">
+				<a class="btn bg-navy" href="<?= base_url('report/index/'.$this->router->fetch_class().'/'.$this->session->userdata($this->router->fetch_class())) ?>"><i class="fa fa-print"></i> Cetak Laporan</a>
+			</div>
 		</div>
 	</div>
 </section>

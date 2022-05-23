@@ -162,6 +162,9 @@
 					<div class="col-lg-3">
 						<a href="<?php echo base_url($this->router->fetch_class().'/project/add') ?>" class="btn btn-block btn-flat btn-success"><i class="fa fa-plus"></i> Add Project</a>
 					</div>
+					<div class="col-lg-3 pull-right">
+						<a class="btn bg-navy" href="<?= base_url('report/index/'.$this->router->fetch_class().'/'.$this->session->userdata($this->router->fetch_class())) ?>"><i class="fa fa-print"></i> Cetak Laporan</a>
+					</div>
 				</div>
 			</div>
 		</div>

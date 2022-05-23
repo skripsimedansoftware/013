@@ -22,6 +22,16 @@
 		<div class="box">
 			<div class="box-header with-border">
 				<h3 class="box-title">List of Project</h3>
+				<div class="btn-group pull-right">
+					<button type="button" class="btn bg-navy dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-print"></i> Cetak Laporan <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="<?= base_url('report/index/'.$this->router->fetch_class().'/'.$this->session->userdata($this->router->fetch_class())) ?>">Cetak Semua </a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="<?= base_url('report/index/'.$this->router->fetch_class().'/'.$this->session->userdata($this->router->fetch_class()).'/except-completed') ?>">Proyek Berjalan</a></li>
+						<li><a href="<?= base_url('report/index/'.$this->router->fetch_class().'/'.$this->session->userdata($this->router->fetch_class()).'/only-completed') ?>">Proyek Selesai</a></li>
+					</ul>
+				</div>
 			</div>
 			<div class="box-body">
 				<table class="table table-hover table-striped datatable">

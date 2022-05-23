@@ -102,6 +102,10 @@ class Report extends CI_Controller {
 					{
 						$query = $this->project->except_completed()->result();
 					}
+					elseif ($filter == 'only-completed')
+					{
+						$query = $this->project->only_completed()->result();
+					}
 				}
 				else
 				{
