@@ -20,6 +20,12 @@ class Project extends MY_Model
 		$this->db->where_in('id', $data);
 		return $this->db->get($this->table);
 	}
+
+	public function except_completed()
+	{
+		$this->db->where_not_in('status', 'finished');
+		return $this->db->get($this->table);
+	}
 }
 
 /* End of file Project.php */

@@ -86,6 +86,12 @@
 										<label class="label label-primary">Mencari Pekerja</label>
 										<?php
 									}
+									elseif ($project['status'] == 'pending')
+									{
+										?>
+										<label class="label label-warning">Menunggu Konfirmasi</label>
+										<?php
+									}
 									elseif ($project['status'] == 'canceled')
 									{
 										?>

@@ -23,7 +23,7 @@ label.freelancer-info {
 				$saw->addCriteria($criteria->attribute, $criteria->weight, $criteria->name);
 			endforeach;
 
-			$saw->addCriteria('cost', 25, 'Banyaknya proyek yang dikerjakan');
+			$saw->addCriteria('cost', 2.5, 'Banyaknya proyek yang dikerjakan');
 
 			foreach ($this->user->read(array('role' => 'freelancer'))->result() as $user) :
 				$user_criteria = array();
@@ -179,8 +179,6 @@ label.freelancer-info {
 
 			<hr>
 
-			<?php
-			?>
 			<h3>Kecocokan Freelancer dan Kriteria</h3>
 			<table class="table table-hover table-striped table-bordered datatable">
 				<thead>
@@ -231,21 +229,7 @@ label.freelancer-info {
 									<label class="freelancer-info">Project Berjalan</label>
 									<?php if ($project_on_going->num_rows() > 0): ?>
 									: 
-									<ol>
-									<?php foreach ($project_on_going->result() as $project) : ?>
-										<?php $project_detail = $this->project->read(array('id' => $project->project_id)); ?>
-										<?php if ($project_detail->num_rows() > 0) : ?>
-											<?php $project_detail = $project_detail->row() ?>
-										<li>
-											<ul>
-												<li><label class="freelancer-info">Nama Project</label> : <?php echo $project_detail->name ?></li>
-												<li><label class="freelancer-info">Deadline</label> : <?php echo nice_date($project_detail->deadline, 'd-m-Y') ?></li>
-												<li><label class="freelancer-info">Budget Project</label> : Rp.<?php echo number_format($project_detail->budget, 2) ?></li>
-											</ul>
-										</li>
-										<?php endif; ?>
-									<?php endforeach; ?>
-									</ol>
+									<iframe class="embed-responsive-item" src="<?= base_url('studio/project_on_going/'.$freelancer['data']['id']) ?>" style="width: 80%;height: auto;border: 0; overflow: hidden;"></iframe>
 									<br>
 									<?php else: ?>
 									: tidak ada<br>
@@ -254,22 +238,7 @@ label.freelancer-info {
 									<label class="freelancer-info">Project Selesai</label>
 									<?php if ($project_has_rating->num_rows() > 0): ?>
 									: 
-									<ol>
-									<?php foreach ($project_has_rating->result() as $project) : ?>
-										<?php $project_detail = $this->project->read(array('id' => $project->project_id)); ?>
-										<?php if ($project_detail->num_rows() > 0) : ?>
-											<?php $project_detail = $project_detail->row() ?>
-										<li>
-											<ul>
-												<li><label class="freelancer-info">Nama Project</label> : <?php echo $project_detail->name ?></li>
-												<li><label class="freelancer-info">Deadline</label> : <?php echo nice_date($project_detail->deadline, 'd-m-Y') ?></li>
-												<li><label class="freelancer-info">Budget Project</label> : Rp.<?php echo number_format($project_detail->budget, 2) ?></li>
-												<li><label class="freelancer-info">Rating Project</label> : <?php echo $project->rating ?></li>
-											</ul>
-										</li>
-										<?php endif; ?>
-									<?php endforeach; ?>
-									</ol>
+									<iframe class="embed-responsive-item" src="<?= base_url('studio/project_completed/'.$freelancer['data']['id']) ?>" style="width: 80%;height: auto;border: 0; overflow: hidden;"></iframe>
 									<br>
 									<?php else: ?>
 									: tidak ada<br>

@@ -15,6 +15,13 @@ class Notification extends MY_Model
 		parent::__construct();
 		$this->set_table('notification');
 	}
+
+	public function get(array $where)
+	{
+		$this->db->order_by('id', 'desc');
+		$this->db->where($where);
+		return $this->db->get($this->table);
+	}
 }
 
 /* End of file Notification.php */

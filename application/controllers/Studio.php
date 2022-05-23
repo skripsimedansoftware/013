@@ -273,6 +273,18 @@ class Studio extends CI_Controller {
 		}
 	}
 
+	public function project_on_going($id)
+	{
+		$data['project_on_going'] = $this->freelancer_project->on_going($id);;
+		$this->load->view('studio/saw_freelance/project_on_going', $data);
+	}
+
+	public function project_completed($id)
+	{
+		$data['project_on_going'] = $this->freelancer_project->has_rating($id);;
+		$this->load->view('studio/saw_freelance/project_completed', $data);
+	}
+
 	public function set_project_status($id = NULL, $status = 'in-progress')
 	{
 		if (!empty($id))
@@ -497,6 +509,7 @@ class Studio extends CI_Controller {
 		if (!empty($project_id))
 		{
 			$data['project_id'] = $project_id;
+			$data['eks'] = $this;
 			$this->template->load('saw_freelance/home', $data);
 		}
 		else
