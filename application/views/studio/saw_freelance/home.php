@@ -259,7 +259,15 @@ label.freelancer-info {
 			</table>
 		</div>
 		<div class="box-footer">
-			<a href="<?php echo base_url($this->router->fetch_class().'/project') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+			<div class="row">
+				<div class="col-lg-12">
+					Berdasarkan hasil perhitungan menggunakan metode SAW, maka freelancer yang paling kami rekomendasikan adalah <b><?php echo $saw->getAlternative()->get(array_key_first($sum_prefrence))['data']['full_name'] ?></b>
+				</div>
+				<div class="col-lg-12" style="margin-top: 1%;">
+					<a href="<?php echo base_url($this->router->fetch_class().'/project') ?>" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+					<a href="<?php echo base_url('report/saw/'.$project_id) ?>" class="btn bg-navy pull-right"><i class="fa fa-print"></i> Cetak Laporan</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
