@@ -68,8 +68,15 @@ class Report extends CI_Controller {
 		{
 			$this->alphapdf->CellFitScale(26, 8, "\tStudio", 1, 0, 'L');
 		}
+		if ($user == 'admin')
+		{
+			$this->alphapdf->CellFitScale(26, 8, "\tFreelancer", 1, 0, 'L');
+		}
+		else
+		{
+			$this->alphapdf->CellFitScale(26, 8, "\tArea", 1, 0, 'L');
+		}
 		$this->alphapdf->CellFitScale(22, 8, "\tCategory", 1, 0, 'L');
-		$this->alphapdf->CellFitScale(26, 8, "\tArea", 1, 0, 'L');
 		$this->alphapdf->CellFitScale(40, 8, "\tBudget", 1, 0, 'L');
 		$this->alphapdf->CellFitScale(20, 8, "\tDeadline", 1, 0, 'L');
 		$this->alphapdf->CellFitScale(22, 8, "\tStatus", 1, 0, 'L');
@@ -184,8 +191,15 @@ class Report extends CI_Controller {
 			{
 				$this->alphapdf->CellFitScale(26, 8, "\t".$studio, 1, 0, 'L');
 			}
+			if ($user == 'admin')
+			{
+				$this->alphapdf->CellFitScale(26, 8, "\t".$freelancer, 1, 0, 'L');
+			}
+			else
+			{
+				$this->alphapdf->CellFitScale(26, 8, "\t".$project->area.' m2', 1, 0, 'L');
+			}
 			$this->alphapdf->CellFitScale(22, 8, "\t".$category, 1, 0, 'L');
-			$this->alphapdf->CellFitScale(26, 8, "\t".$project->area.' m2', 1, 0, 'L');
 			$this->alphapdf->CellFitScale(8, 8, "\tIDR", 1, 0, 'L');
 			$this->alphapdf->CellFitScale(32, 8, "\t".number_format($project->budget, 2, ',', '.'), 1, 0, 'R');
 			$this->alphapdf->CellFitScale(20, 8, "\t".nice_date($project->deadline, 'd/m/Y'), 1, 0, 'L');
