@@ -60,7 +60,14 @@ class Report extends CI_Controller {
 		$this->alphapdf->SetFont('Times', 'B', 10);
 		$this->alphapdf->CellFitScale(10, 8, "\tNo", 1, 0, 'L');
 		$this->alphapdf->CellFitScale(24, 8, "\tNama Projek", 1, 0, 'L');
-		$this->alphapdf->CellFitScale(26, 8, "\tStudio", 1, 0, 'L');
+		if ($user == 'studio')
+		{
+			$this->alphapdf->CellFitScale(26, 8, "\tFreelancer", 1, 0, 'L');
+		}
+		else
+		{
+			$this->alphapdf->CellFitScale(26, 8, "\tStudio", 1, 0, 'L');
+		}
 		$this->alphapdf->CellFitScale(22, 8, "\tCategory", 1, 0, 'L');
 		$this->alphapdf->CellFitScale(26, 8, "\tArea", 1, 0, 'L');
 		$this->alphapdf->CellFitScale(40, 8, "\tBudget", 1, 0, 'L');
@@ -118,6 +125,16 @@ class Report extends CI_Controller {
 		{
 			$studio = $this->user->read(array('id' => $project->owner));
 
+			$freelancer = '-';
+
+			$freelancer_project = $this->freelancer_project->read(array('project_id' => $project->id));
+			if ($freelancer_project->num_rows() >= 1)
+			{
+				$freelancer_project = $freelancer_project->row();
+				$freelancer = $freelancer_project->user_id;
+				$freelancer = $this->user->read(array('id' => $freelancer))->row()->full_name;
+			}
+
 			if ($studio->num_rows() >= 1)
 			{
 				$studio = $studio->row()->full_name;
@@ -159,7 +176,14 @@ class Report extends CI_Controller {
 
 			$this->alphapdf->CellFitScale(10, 8, "\t".($key+1), 1, 0, 'L');
 			$this->alphapdf->CellFitScale(24, 8, "\t".$project->name, 1, 0, 'L');
-			$this->alphapdf->CellFitScale(26, 8, "\t".$studio, 1, 0, 'L');
+			if ($user == 'studio')
+			{
+				$this->alphapdf->CellFitScale(26, 8, "\t".$freelancer, 1, 0, 'L');
+			}
+			else
+			{
+				$this->alphapdf->CellFitScale(26, 8, "\t".$studio, 1, 0, 'L');
+			}
 			$this->alphapdf->CellFitScale(22, 8, "\t".$category, 1, 0, 'L');
 			$this->alphapdf->CellFitScale(26, 8, "\t".$project->area.' m2', 1, 0, 'L');
 			$this->alphapdf->CellFitScale(8, 8, "\tIDR", 1, 0, 'L');
@@ -358,11 +382,11 @@ class Report extends CI_Controller {
 		$this->alphapdf->SetFont('Times', 'B', 10);
 
 		$this->alphapdf->CellFitScale(20, 8, "\tRangking", 1, 0, 'L');
-		$this->alphapdf->CellFitScale(60, 8, "\tNama Freelancer", 1, 0, 'L');
+		$this->alphapdf->CellFitScale(30, 8, "\tNama Freelancer", 1, 0, 'L');
 		foreach ($saw->getCriteria()->get() as $criteria_key => $criteria) :
 			$this->alphapdf->CellFitScale(10.68, 8, "\tC".($criteria_key+1), 1, 0, 'C');
 		endforeach;
-		$this->alphapdf->CellFitScale(40, 8, "\tTotal Perhitungan SAW", 1, 0, 'L');
+		$this->alphapdf->CellFitScale(36, 8, "\tTotal Perhitungan SAW", 1, 0, 'L');
 		$this->alphapdf->Ln();
 
 		$this->alphapdf->SetFont('Times', '', 10);
@@ -375,11 +399,11 @@ class Report extends CI_Controller {
 			$project_on_going = $this->freelancer_project->on_going($freelancer['data']['id']);
 
 			$this->alphapdf->CellFitScale(20, 8, "\t".$rank, 1, 0, 'C');
-			$this->alphapdf->CellFitScale(60, 8, "\t".$freelancer['data']['full_name'], 1, 0, 'L');
+			$this->alphapdf->CellFitScale(30, 8, "\t".$freelancer['data']['full_name'], 1, 0, 'L');
 			foreach ($freelancer['criteria'] as $freelancer_criteria) :
 				$this->alphapdf->CellFitScale(10.68, 8, "\t".$freelancer_criteria, 1, 0, 'L');
 			endforeach;
-			$this->alphapdf->CellFitScale(40, 8, "\t".$value, 1, 0, 'L');
+			$this->alphapdf->CellFitScale(36, 8, "\t".$value, 1, 0, 'L');
 			$rank++;
 			$this->alphapdf->Ln();
 		endforeach;
