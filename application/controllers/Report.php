@@ -27,7 +27,7 @@ class Report extends CI_Controller {
 		$this->alphapdf->SetTitle('Laporan Daftar Projek');
 		$this->alphapdf->AddPage();
 		// $this->alphapdf->SetLineWidth(1.5);
-		$this->alphapdf->Image(FCPATH.'LAPORAN.jpg', 2, 6, 206, 284);
+		$this->alphapdf->Image(FCPATH.'LAPORAN.jpeg', 2, 6, 206, 284);
 
 		// restore full opacity
 		$this->alphapdf->SetAlpha(1);
@@ -297,7 +297,7 @@ class Report extends CI_Controller {
 		$this->alphapdf->SetTitle('Laporan Hasil Rekomendasi Freelancer');
 		$this->alphapdf->AddPage();
 		// $this->alphapdf->SetLineWidth(1.5);
-		$this->alphapdf->Image(FCPATH.'LAPORAN.jpg', 2, 6, 206, 284);
+		$this->alphapdf->Image(FCPATH.'LAPORAN.jpeg', 2, 6, 206, 284);
 
 		// restore full opacity
 		$this->alphapdf->SetAlpha(1);
