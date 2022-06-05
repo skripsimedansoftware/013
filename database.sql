@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2021 at 10:21 PM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.3.29
+-- Generation Time: Jun 05, 2022 at 08:48 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `spk-pembagian-project`
+-- Database: `saw`
 --
 
 -- --------------------------------------------------------
@@ -78,17 +78,34 @@ CREATE TABLE `freelancer_project` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(4) NOT NULL,
+  `role` enum('admin','studio','freelancer') DEFAULT NULL,
+  `user_id` int(2) DEFAULT NULL,
+  `uri` varchar(100) NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `project`
 --
 
 CREATE TABLE `project` (
   `id` int(4) NOT NULL,
+  `owner` int(2) NOT NULL,
   `name` varchar(40) NOT NULL,
   `category` int(4) NOT NULL,
   `area` varchar(20) DEFAULT NULL,
   `budget` double NOT NULL,
   `deadline` date DEFAULT NULL,
-  `status` enum('search-freelance','canceled','in-progress','not-completed','finished') NOT NULL
+  `percent` int(3) DEFAULT NULL,
+  `temp-change` longtext DEFAULT NULL,
+  `status` enum('search-freelance','pending','canceled','in-progress','not-completed','finished') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -123,7 +140,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role`, `email`, `username`, `password`, `full_name`, `photo`) VALUES
-(1, 'admin', 'agungmasda29@gmail.com', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', NULL);
+(1, 'admin', 'agungmasda29@gmail.com', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', NULL),
+(2, 'studio', 'OXoqvG@gmai.com', 'studio', '9a12c50f2f23af9f1a313af952aee2b30627ac7b', 'Studio', NULL);
 
 --
 -- Indexes for dumped tables
@@ -145,6 +163,18 @@ ALTER TABLE `criteria`
 -- Indexes for table `email_confirm`
 --
 ALTER TABLE `email_confirm`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `freelancer_project`
+--
+ALTER TABLE `freelancer_project`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -188,6 +218,18 @@ ALTER TABLE `email_confirm`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `freelancer_project`
+--
+ALTER TABLE `freelancer_project`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
@@ -203,7 +245,7 @@ ALTER TABLE `project_category`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
